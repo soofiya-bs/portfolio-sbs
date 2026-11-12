@@ -3,7 +3,10 @@ import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { BackgroundFX } from "@/components/BackgroundFX";
+import { RevealObserver } from "@/components/motion";
 import { site, education } from "@/content/site";
+import { themeInitScript } from "@/components/ThemeToggle";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-fraunces", display: "swap", axes: ["opsz"] });
@@ -37,8 +40,11 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#08090c",
-  colorScheme: "dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#faf8f3" },
+    { media: "(prefers-color-scheme: dark)", color: "#0c0d11" },
+  ],
+  colorScheme: "light dark",
 };
 
 const personJsonLd = {
@@ -51,19 +57,26 @@ const personJsonLd = {
   email: `mailto:${site.email}`,
   alumniOf: education.map((e) => ({ "@type": "CollegeOrUniversity", name: e.school })),
   knowsAbout: ["Applied AI Engineering", "Large Language Models", "Retrieval-Augmented Generation", "AI Agents", "Machine Learning"],
-  sameAs: Object.values(site.socials),
+  sameAs: Object.values(site.socials).filter(Boolean),
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable} ${jetbrains.variable}`}>
+    <html lang="en" className={`${inter.variable} ${fraunces.variable} ${jetbrains.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="min-h-screen">
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-gold focus:px-4 focus:py-2 focus:text-ink">
           Skip to content
         </a>
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
+        <BackgroundFX />
+        <RevealObserver />
+        <div className="relative z-10">
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
+        </div>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
       </body>
     </html>

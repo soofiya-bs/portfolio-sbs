@@ -1,8 +1,28 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+/**
+ * Jewel accent palette — gold, emerald, royal blue, plum.
+ * Full class names are spelled out so Tailwind can see them.
+ */
+export const accents = [
+  { text: "text-gold", bg: "bg-gold", soft: "bg-gold/10", border: "border-gold/30", glow: "glow-gold" },
+  { text: "text-emerald", bg: "bg-emerald", soft: "bg-emerald/10", border: "border-emerald/30", glow: "glow-emerald" },
+  { text: "text-royal", bg: "bg-royal", soft: "bg-royal/10", border: "border-royal/30", glow: "glow-royal" },
+  { text: "text-plum", bg: "bg-plum", soft: "bg-plum/10", border: "border-plum/30", glow: "glow-plum" },
+] as const;
+
+export const accent = (i: number) => accents[((i % accents.length) + accents.length) % accents.length];
+
+/** Stable colour for a word (e.g. a tag), so "RAG" is always the same colour everywhere. */
+export function accentFor(word: string) {
+  let h = 0;
+  for (const c of word) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+  return accent(h);
+}
+
 export function Container({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`mx-auto w-full max-w-6xl px-5 sm:px-8 ${className}`}>{children}</div>;
+  return <div className={`mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12 ${className}`}>{children}</div>;
 }
 
 export function Section({ children, className = "", id }: { children: ReactNode; className?: string; id?: string }) {
@@ -34,7 +54,7 @@ export function SectionHeading({
   as?: "h1" | "h2";
 }) {
   return (
-    <div className="max-w-2xl">
+    <div data-reveal className="max-w-2xl">
       <Eyebrow>{eyebrow}</Eyebrow>
       <Tag className="mt-4 font-serif text-4xl leading-[1.08] tracking-tight text-text sm:text-5xl">{title}</Tag>
       {lead && <p className="mt-5 text-lg leading-relaxed text-muted">{lead}</p>}
@@ -54,7 +74,7 @@ export function ButtonLink({ href, children, variant = "primary", className = ""
     "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all duration-200";
   const styles =
     variant === "primary"
-      ? "bg-gold text-ink hover:bg-gold-soft shadow-[0_8px_30px_-10px_rgba(214,177,106,0.6)]"
+      ? "btn-shine bg-btn text-btn-fg hover:bg-btn-hover shadow-[0_10px_30px_-12px_rgba(22,23,27,0.55)]"
       : "border border-line-strong text-text hover:border-gold/60 hover:text-gold-soft";
   return (
     <Link href={href} className={`${base} ${styles} ${className}`}>
@@ -72,7 +92,14 @@ export function Arrow() {
 }
 
 export function Tag({ children }: { children: ReactNode }) {
+  const a = typeof children === "string" ? accentFor(children) : null;
   return (
-    <span className="rounded-full border border-line px-2.5 py-1 font-mono text-[11px] text-muted">{children}</span>
+    <span
+      className={`rounded-full border px-2.5 py-1 font-mono text-[11px] ${
+        a ? `${a.border} ${a.soft} ${a.text}` : "border-line text-muted"
+      }`}
+    >
+      {children}
+    </span>
   );
 }

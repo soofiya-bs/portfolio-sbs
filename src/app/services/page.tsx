@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
-import { Section } from "@/components/ui";
+import { accent, Section } from "@/components/ui";
 import { CtaBand, ServiceCards } from "@/components/sections";
+import { Testimonials } from "@/components/Testimonials";
 
 export const metadata: Metadata = {
   title: "Services — Mentorship, Expert Talks & AI Development",
@@ -37,13 +38,14 @@ export default function ServicesPage() {
         <ol className="mt-6 grid gap-5 md:grid-cols-4">
           {process.map((p, i) => (
             <li key={p.t} className="card p-6">
-              <span className="font-mono text-xs text-gold">0{i + 1}</span>
+              <span className={`inline-grid h-8 w-8 place-items-center rounded-full font-mono text-xs ${accent(i).soft} ${accent(i).text}`}>0{i + 1}</span>
               <h2 className="mt-3 text-lg font-medium text-text">{p.t}</h2>
               <p className="mt-2 text-sm leading-relaxed text-muted">{p.d}</p>
             </li>
           ))}
         </ol>
       </Section>
+      <Testimonials title="What institutions and clients say." />
       <CtaBand />
     </>
   );

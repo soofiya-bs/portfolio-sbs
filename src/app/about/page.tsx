@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { site, skills } from "@/content/site";
+import Image from "next/image";
+import { bio, certifications, site, skills, writing } from "@/content/site";
 import { PageHero } from "@/components/PageHero";
 import { Section } from "@/components/ui";
 import { CtaBand, Credentials } from "@/components/sections";
@@ -25,28 +26,28 @@ export default function AboutPage() {
 
       <Section>
         <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
-          {/* Replace with <Image src="/portrait.jpg" ... /> once you add a photo to /public */}
-          <div className="card relative aspect-[4/5] overflow-hidden">
-            <div className="absolute inset-0 grid-bg opacity-60" />
-            <div className="absolute inset-0 grid place-items-center">
-              <span className="font-serif text-7xl text-gold/70">{site.shortName}</span>
+          <div className="relative self-start">
+            <div className="pointer-events-none absolute -left-5 -top-5 h-full w-full rounded-[1.5rem] border border-gold/30" />
+            <div className="card relative overflow-hidden !rounded-[1.5rem] p-0">
+              <Image
+                src="/portrait.jpg"
+                alt={`Portrait of ${site.name}`}
+                width={1280}
+                height={1280}
+                sizes="(min-width: 1024px) 420px, 90vw"
+                className="aspect-[4/5] w-full origin-[52%_75%] scale-[1.3] object-cover"
+              />
             </div>
-            <p className="absolute bottom-5 left-5 font-mono text-[11px] text-faint">[ your portrait here ]</p>
           </div>
           <div className="space-y-6 text-lg leading-relaxed text-muted">
-            <p>
-              <span className="text-text">[Write 2–3 sentences about your story.]</span> I&apos;m {site.name}, currently
-              studying at IIT Madras and working as an applied AI engineer. I care about one thing: turning AI from
-              something people watch videos about into something they can actually build.
-            </p>
-            <p>
-              On the teaching side, I run a guided self-learning program built on industry-approved roadmaps — weekly
-              and daily modules with an expert review every single week. I also speak at colleges, academies and
-              companies about applied AI.
-            </p>
-            <p>
-              On the engineering side, I design and ship LLM applications, RAG systems and AI agents for teams that need
-              them to work in production, not just in a demo.
+            {bio.map((para, i) => (
+              <p key={i} className={i === 0 ? "text-text" : ""}>
+                {para}
+              </p>
+            ))}
+            <p className="text-base">
+              Open to Applied AI Engineer / AI Developer roles in Hyderabad, selected AI automation and LLM application
+              projects, and collaborations on useful, deployed AI products.
             </p>
             <div className="flex flex-wrap gap-2 pt-4">
               {skills.map((s) => (
@@ -61,6 +62,38 @@ export default function AboutPage() {
 
       <Section className="border-t border-line">
         <Credentials />
+      </Section>
+
+      <Section className="border-t border-line">
+        <div className="grid gap-12 lg:grid-cols-2">
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-faint">Writing</p>
+            <ul className="mt-4 divide-y divide-line border-y border-line">
+              {writing.map((w) => (
+                <li key={w.title} className="py-4">
+                  {w.href ? (
+                    <a href={w.href} target="_blank" rel="noopener noreferrer" className="font-serif text-xl text-text hover:text-gold-soft">
+                      {w.title}
+                    </a>
+                  ) : (
+                    <span className="font-serif text-xl text-text">{w.title}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-faint">Certifications & workshops</p>
+            <ul className="mt-4 space-y-3">
+              {certifications.map((c) => (
+                <li key={c} className="flex gap-3 text-[15px] text-muted">
+                  <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-gold" />
+                  {c}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </Section>
 
       <CtaBand />

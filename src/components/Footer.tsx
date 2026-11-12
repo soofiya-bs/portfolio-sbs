@@ -34,7 +34,7 @@ export function Footer() {
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-faint">Connect</p>
             <ul className="mt-4 space-y-2.5">
-              {Object.entries(site.socials).map(([key, href]) => (
+              {Object.entries(site.socials).filter(([, href]) => href).map(([key, href]) => (
                 <li key={key}>
                   <a href={href} target="_blank" rel="noopener noreferrer" className="text-sm text-muted transition-colors hover:text-gold-soft">
                     {socialLabels[key] ?? key}

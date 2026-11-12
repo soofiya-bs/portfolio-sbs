@@ -6,15 +6,15 @@
  */
 
 export const site = {
-  name: "[Your Name]",
-  shortName: "[YN]",
+  name: "Soofiya Binth Shajahan",
+  shortName: "SB",
   role: "Applied AI Engineer · Mentor · Founder",
-  tagline: "I build production AI systems — and teach engineers to build them too.",
+  tagline: "Applied AI Engineer helping self-learners through guided self-learning.",
   description:
-    "Applied AI engineer and mentor from IIT Madras. Guided self-learning programs on industry-approved AI engineering roadmaps, expert talks for institutions, and AI product development for companies.",
+    "Soofiya Binth Shajahan is an applied AI engineer and mentor pursuing a BS at IIT Madras. Guided self-learning in applied AI engineering, expert AI sessions for institutions, and LLM applications and AI automation for companies.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com",
-  email: "[hello@yourdomain.com]",
-  location: "Chennai, India",
+  email: "soofiyashajahan@gmail.com",
+  location: "Hyderabad · Kerala, India",
   keywords: [
     "applied AI engineering",
     "AI engineering mentor",
@@ -26,109 +26,204 @@ export const site = {
     "hire AI engineer",
     "RAG development",
     "AI agents developer",
+    "AI automation",
     "IIT Madras",
+    "Soofiya Binth Shajahan",
+    "AI engineer Hyderabad",
+    "AI trainer Kerala",
   ],
+  /** Empty links are hidden automatically. */
   socials: {
-    instagram: "https://instagram.com/[handle]",
-    youtube: "https://youtube.com/@[handle]",
-    linkedin: "https://linkedin.com/in/[handle]",
-    github: "https://github.com/[handle]",
+    instagram: "https://www.instagram.com/soofiya.bs/",
+    youtube: "" /* add your YouTube URL */,
+    linkedin: "https://www.linkedin.com/in/soofiya-binth-shajahan/",
+    github: "" /* add your GitHub URL */,
   },
 };
 
 export const stats = [
-  { value: "[500+]", label: "Learners mentored" },
-  { value: "[40+]", label: "Workshops & talks" },
-  { value: "[25+]", label: "AI projects shipped" },
-  { value: "[3+]", label: "Years in industry" },
+  { value: "6,800+", label: "Learners on Instagram" },
+  { value: "4+", label: "Years of mentoring & development" },
+  { value: "4", label: "Active platforms" },
+  { value: "4+", label: "Countries worked with" },
+];
+
+/** Short first-person bio paragraphs, used on the About page. */
+export const bio = [
+  "I'm an applied AI engineer focused on building practical AI applications, automation systems and useful developer tools. I'm pursuing a BS in Programming and Applications at IIT Madras, and I bring experience across software development, Python, technical education and community building.",
+  "My current focus is turning real workflows into useful AI products — from LLM applications and automation to retrieval-based systems, agentic workflows and Python APIs. I like taking an unclear problem, building a simple working solution, and improving it through testing, feedback and iteration.",
+  "Teaching has been the other half of my work since 2023: lecturing in computer programming and mathematics, training polytechnic students in Python and AI, and now helping 6,800+ self-learners on Instagram understand applied AI engineering. Delivering AI sessions and consultations has taught me to translate technical ideas into practical solutions for non-technical people.",
 ];
 
 export const education = [
   {
     school: "Indian Institute of Technology Madras",
-    degree: "[BS in Data Science and Applications]",
-    period: "[2023 — Present]",
-    note: "[Focus areas, CGPA, clubs or anything worth highlighting]",
+    degree: "BS in Programming and Applications",
+    period: "2023 — 2029",
+    note: "Currently pursuing. Building applied AI and software engineering depth alongside full-time work.",
   },
 ];
 
 export const experience = [
   {
-    kind: "Training",
-    title: "[Founder & Lead Mentor]",
-    org: "[Your Mentoring Program]",
-    period: "[2024 — Present]",
-    points: [
-      "[Designed a roadmap-driven applied AI curriculum with weekly and daily modules]",
-      "[Run weekly expert reviews for every cohort]",
-    ],
+    kind: "Development",
+    title: "Head of Artificial Intelligence",
+    org: "Made For Easy",
+    period: "Jun 2023 — Present · Kochi",
+    points: ["Lead AI product work at Made For Easy, shipping AI-powered platforms including Evermi, Skillage and ResumeAI."],
   },
   {
     kind: "Training",
-    title: "[Corporate / Academic Trainer]",
-    org: "[Institution or company]",
-    period: "[2023 — 2024]",
-    points: ["[Delivered X workshops on GenAI, LLMs and MLOps to Y participants]"],
+    title: "Content Creator — AI Engineering",
+    org: "Instagram",
+    period: "May 2026 — Present",
+    points: ["Create Instagram content on AI engineering and software engineering for 6,800+ followers, making the concepts easy to learn for tech aspirants."],
   },
   {
     kind: "Development",
-    title: "[AI Engineer]",
-    org: "[Company]",
-    period: "[2022 — Present]",
+    title: "Lead of Technical and Growth",
+    org: "CortexIntel (United Kingdom)",
+    period: "Jan 2026 — Jun 2026",
+    points: [],
+  },
+  {
+    kind: "Training",
+    title: "Mathematics Specialist",
+    org: "90+ My Tuition App (UAE)",
+    period: "Mar 2025 — Apr 2026",
+    points: [],
+  },
+  {
+    kind: "Business",
+    title: "Business Development Executive",
+    org: "Brototype",
+    period: "Aug 2025 — Feb 2026 · Kochi",
+    points: ["Joined as an intern and was promoted to Business Development Executive."],
+  },
+  {
+    kind: "Training",
+    title: "AI & Python Internship Trainer",
+    org: "Cozmek Pvt Ltd · Govt Model Polytechnic College, Vatakara",
+    period: "Jun 2025 — Aug 2025",
     points: [
-      "[Built and shipped an LLM-powered product used by N users]",
-      "[Designed RAG pipelines and evaluation harnesses]",
+      "Trained final-year Electronics students in Python and AI basics through hands-on sessions and structured modules.",
+      "Guided real-world mini projects applying AI to electronics use cases.",
     ],
+  },
+  {
+    kind: "Training",
+    title: "Lead Tutor — Mathematics",
+    org: "Knowlix Learning",
+    period: "Dec 2023 — Aug 2025",
+    points: ["Delivered IGCSE and CBSE mathematics sessions for students across India and the GCC, and ran occasional teacher training."],
+  },
+  {
+    kind: "Training",
+    title: "Mathematics Teacher",
+    org: "Escola International School",
+    period: "Jun 2024 — Mar 2025",
+    points: ["Class 10 in-charge and high school coordinator for the inter-school arts competition."],
+  },
+  {
+    kind: "Training",
+    title: "Lead Lecturer — Computer Programming, CS & Mathematics",
+    org: "Wadi Twaiba Girls Residential College",
+    period: "Jul 2023 — Jun 2024 · Ernakulam",
+    points: ["Mathematics and computer programming faculty, full-stack trainer and course coordinator."],
   },
 ];
 
-/** The guided self-learning program. */
+export const writing = [
+  { title: "What is Agentic AI and AI Agents?", href: "" },
+  { title: "What Is Docker? The Real Problem It Solves for Applied AI Engineers", href: "" },
+  { title: "Building Your Personal Brand on LinkedIn as an Applied AI Engineer", href: "" },
+];
+
+export const certifications = [
+  "Claude Code 101 — Anthropic",
+  "Claude 101 — Anthropic",
+  "Introduction to Claude Cowork — Anthropic",
+  "Ganitha Garima",
+  "HackerRank Gold Badge (5 Star) — Problem Solving",
+  "Workshop on Python Programming",
+  "Modern Mathematical Methods and High Performance Computing in Science & Engineering",
+  "Short Term Training Program on Algebra and Analysis",
+];
+
+/** SBS Personal Mentoring — from the Program Guide for Prospective Learners. */
 export const program = {
-  name: "[Program Name]",
+  name: "SBS Personal Mentoring",
   summary:
-    "A guided self-learning program on industry-approved applied AI engineering roadmaps. You learn on a clear daily plan, ship real work every week, and get it reviewed by an expert — so you never study in the dark.",
+    "A one-to-one, self-paced mentoring program in Full Stack AI, with a MERN + AI direction. You follow a structured weekly roadmap, learn from carefully chosen online resources, and meet for a review every seventh day — so your self-learning has structure and direction.",
   steps: [
     {
-      title: "Industry roadmap",
-      body: "Start from a roadmap shaped by what AI teams actually hire for — not a random playlist.",
+      title: "Orientation",
+      body: "Learn how the program works, how to approach self-learning, and get your first week's day-by-day roadmap.",
     },
     {
-      title: "Weekly modules",
-      body: "Each week is one focused theme with a clear outcome and a project to ship.",
+      title: "Days 1–6: learn & practise",
+      body: "Work through the assigned topics with recommended resources, plus short activities to practise communication.",
     },
     {
-      title: "Daily modules",
-      body: "Bite-sized daily tasks: read, build, reflect. Steady progress, no overwhelm.",
+      title: "Report progress",
+      body: "Share your work and progress regularly, so your learning stays visible and on track.",
     },
     {
-      title: "Weekly expert review",
-      body: "Every week you present your work and get direct, honest feedback from me.",
+      title: "Day 7: review",
+      body: "A live one-to-one review on Google Meet to discuss your progress — sometimes with an industry expert.",
     },
   ],
+  glance: [
+    { k: "Format", v: "One-to-one mentoring" },
+    { k: "Learning model", v: "Self-paced, with a weekly roadmap and guidance" },
+    { k: "Focus", v: "Full Stack AI — MERN + AI direction" },
+    { k: "Weekly rhythm", v: "6 days of guided learning, review on day 7" },
+    { k: "Daily commitment", v: "8 hours (full-time) · 4 hours (working learners)" },
+    { k: "Live sessions", v: "Google Meet" },
+  ],
+  join: {
+    title: "Interested in joining? Let's talk.",
+    body: "Every learner starts from a different place, so we begin with a conversation. Send an inquiry and I'll share the orientation details, how the program fits your goals, and everything you need to get started.",
+  },
   tracks: [
-    "Python & software foundations for AI",
-    "Machine learning essentials",
-    "LLMs, prompting & structured outputs",
-    "RAG systems & vector search",
-    "AI agents & tool use",
-    "Evaluation, deployment & LLMOps",
+    "Programming foundations",
+    "MERN stack: MongoDB, Express, React, Node.js",
+    "LLM applications & prompting",
+    "Adding AI features to full-stack apps",
+    "AI agents & automation",
+    "Building & deploying full-stack AI products",
+  ],
+  included: [
+    "A structured weekly roadmap, with a day-by-day plan",
+    "Guidance on what to learn, how to organise it, and which online resources to use",
+    "Weekly one-to-one review sessions",
+    "Optional doubt-clearing sessions when you need focused help",
+  ],
+  notIncluded: [
+    "Recorded tutorial videos — learning uses recommended external resources and your own practice",
+    "Placement assistance or a job guarantee",
+    "A promise of a fixed time to become industry-ready",
   ],
   faqs: [
     {
-      q: "Who is this for?",
-      a: "Students and working engineers who want to move into applied AI engineering and need structure, accountability and expert feedback.",
+      q: "Who can join?",
+      a: "The program is open to learners at different starting points. There is no fixed programming or technology prerequisite — your roadmap and pace are discussed during orientation so the plan matches you.",
     },
     {
       q: "How much time does it take?",
-      a: "[Around 1–2 hours a day]. Daily modules are designed to fit around college or work.",
+      a: "Full-time learners are expected to commit eight hours a day. Working learners are expected to commit four hours a day.",
     },
     {
-      q: "Is it live classes?",
-      a: "No. It is guided self-learning: you follow the roadmap at your own pace each day, and we meet for a live expert review every week.",
+      q: "Are there live classes or recorded videos?",
+      a: "Neither. It is guided self-learning: you follow the roadmap using recommended online resources, and we meet live on Google Meet for your weekly review and any doubt-clearing sessions you book.",
     },
     {
-      q: "What do I need to start?",
-      a: "[Basic programming familiarity]. We will place you on the right starting point after your inquiry.",
+      q: "How do I join?",
+      a: "Send an inquiry through the Work With Me page, email, or a DM on Instagram. I'll get back to you with orientation details, program fees and the next steps.",
+    },
+    {
+      q: "Do you offer placement or a job guarantee?",
+      a: "No. The program gives you a structured, industry-oriented learning path and honest feedback, but it does not include placement assistance or promise a particular job or outcome.",
     },
   ],
 };
@@ -137,9 +232,9 @@ export const services = [
   {
     id: "mentoring",
     eyebrow: "For learners",
-    title: "Guided AI Mentorship",
-    body: "Roadmap-based self-learning with weekly expert reviews. Structured, accountable and built around real projects.",
-    points: ["Industry-approved roadmap", "Weekly + daily modules", "Weekly expert review", "Portfolio-ready projects"],
+    title: "SBS Personal Mentoring",
+    body: "One-to-one, self-paced learning in Full Stack AI (MERN + AI), on a weekly roadmap with a review every seventh day.",
+    points: ["One-to-one mentoring", "Weekly roadmap, day-by-day plan", "Day-7 review on Google Meet", "Contact to join"],
     cta: { label: "Apply as a student", href: "/work-with-me?type=student" },
   },
   {
@@ -155,49 +250,72 @@ export const services = [
     eyebrow: "For companies",
     title: "AI Product Development",
     body: "From prototype to production: LLM applications, RAG systems, AI agents and automation that actually ship.",
-    points: ["LLM & RAG applications", "AI agents & workflow automation", "Evaluation & reliability", "Full-stack delivery (Next.js, Python)"],
+    points: ["LLM & RAG applications", "AI agents & workflow automation", "Python APIs & databases (PostgreSQL)", "Full-stack delivery (React, Node.js)"],
     cta: { label: "Start a project", href: "/work-with-me?type=project" },
   },
 ];
 
 export const projects = [
   {
-    slug: "project-one",
-    title: "[Project One — e.g. Enterprise RAG Assistant]",
-    summary: "[One line on the problem and the outcome, ideally with a number.]",
-    tags: ["RAG", "LLM", "Next.js"],
+    slug: "evermi",
+    title: "Evermi — AI-Powered Beauty & Skincare E-Commerce",
+    meta: "Made For Easy · Oct 2026 — Present · Launching soon",
+    summary: "An AI-powered e-commerce platform for a beauty and skincare startup, building a smarter, more personal way to shop for skincare.",
+    tags: ["AI", "E-commerce", "Full-stack"],
     link: "",
     repo: "",
   },
   {
-    slug: "project-two",
-    title: "[Project Two — e.g. Multi-agent Research Workflow]",
-    summary: "[One line on the problem and the outcome.]",
-    tags: ["Agents", "Python", "Evaluation"],
+    slug: "skillage",
+    title: "Skillage — AI-Powered Academic Manager",
+    meta: "Made For Easy · Oct — Nov 2026",
+    summary: "A web platform for training institutes to assign, evaluate and rank learner work, with AI-integrated assessment tracking.",
+    tags: ["AI", "EdTech", "Assessment"],
     link: "",
     repo: "",
   },
   {
-    slug: "project-three",
-    title: "[Project Three — e.g. Learner Progress Platform]",
-    summary: "[One line on the problem and the outcome.]",
-    tags: ["Full-stack", "Postgres", "AI"],
+    slug: "resumeai",
+    title: "ResumeAI — AI-Powered Resume Analyzer",
+    meta: "Made For Easy · Sep 2026",
+    summary: "A full-stack web app where job seekers upload a resume and a target job description and get AI feedback on how to communicate their value.",
+    tags: ["LLM", "Full-stack", "Document analysis"],
     link: "",
     repo: "",
   },
   {
-    slug: "project-four",
-    title: "[Project Four — e.g. Document Intelligence Pipeline]",
-    summary: "[One line on the problem and the outcome.]",
-    tags: ["OCR", "Extraction", "FastAPI"],
+    slug: "made-for-easy-health",
+    title: "Made For Easy — Digital Health Records",
+    meta: "Made For Easy",
+    summary: "A centralised health records system with doctor appointment booking, lab test scheduling and encrypted medical data storage.",
+    tags: ["MERN", "Socket.IO", "Stripe"],
+    link: "",
+    repo: "",
+  },
+  {
+    slug: "knowlix-platform",
+    title: "Knowlix Learning Platform",
+    meta: "E-learning",
+    summary: "An e-learning platform connecting students with educational institutions, with demo access and course management.",
+    tags: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
+    link: "",
+    repo: "",
+  },
+  {
+    slug: "ember-upgrade",
+    title: "Legacy Ember.js Upgrade for a Danish Client",
+    meta: "Client project · Denmark",
+    summary: "Upgraded a legacy codebase to the latest Ember.js and modernised the UI/UX for better performance.",
+    tags: ["Ember.js", "Node.js", "PostgreSQL"],
     link: "",
     repo: "",
   },
 ];
 
 export const skills = [
-  "Python", "PyTorch", "LLMs", "RAG", "LangGraph", "Agents", "Vector DBs",
-  "FastAPI", "Next.js", "TypeScript", "Postgres", "Docker", "Evaluation", "MLOps",
+  "Python", "LLM applications", "RAG", "AI agents", "AI automation", "Python APIs",
+  "PostgreSQL", "Database design", "Docker", "Claude Code", "React", "Node.js",
+  "TypeScript", "Java", "Spring Boot", "AWS",
 ];
 
 export const nav = [
@@ -205,4 +323,110 @@ export const nav = [
   { label: "Mentorship", href: "/mentorship" },
   { label: "Services", href: "/services" },
   { label: "Projects", href: "/projects" },
+  { label: "Blog", href: "/blog" },
+  { label: "Tutorials", href: "/tutorials" },
+  { label: "Gallery", href: "/gallery" },
 ];
+
+/* ─────────────────────────────────────────────────────────────
+ *  TESTIMONIALS & GALLERY
+ *  Entries with `sample: true` are placeholders: they show while you run
+ *  `npm run dev` (with a "Sample" badge) and are hidden on the live site.
+ *  Replace them with real ones and delete the `sample` line.
+ * ───────────────────────────────────────────────────────────── */
+
+export const showSamples = process.env.NODE_ENV !== "production";
+
+export type Testimonial = {
+  quote: string;
+  name: string;
+  /** e.g. "Final-year B.Tech student" or "Head of CSE, ABC College" */
+  role: string;
+  /** who it's from — controls which pages show it */
+  category: "student" | "institution" | "client";
+  /** optional square photo in /public/testimonials/ */
+  photo?: string;
+  sample?: boolean;
+};
+
+/**
+ * Add real testimonials here (with permission). The sections on Home, Mentorship
+ * and Services stay hidden until this list has at least one entry. Example:
+ *
+ *   {
+ *     quote: "…",
+ *     name: "Learner name",
+ *     role: "Final-year B.Tech student · SBS Personal Mentoring",
+ *     category: "student",           // "student" | "institution" | "client"
+ *     photo: "/testimonials/name.jpg", // optional
+ *   },
+ */
+export const testimonials: Testimonial[] = [];
+
+export type GalleryItem = {
+  /** image in /public/gallery/ — leave empty on samples */
+  src?: string;
+  alt: string;
+  caption: string;
+  category: "Workshops" | "Mentoring" | "Talks & Events" | "Behind the scenes";
+  /** the image's real pixel size (keeps the layout stable while loading) */
+  width: number;
+  height: number;
+  sample?: boolean;
+};
+
+export const gallery: GalleryItem[] = [
+  {
+    src: "/gallery/learners-at-skillage.jpg",
+    alt: "Soofiya Binth Shajahan teaching a full classroom of learners with laptops at Skillage Digital Academy",
+    caption: "A full house of learners at Skillage Digital Academy",
+    category: "Talks & Events",
+    width: 2000,
+    height: 1333,
+  },
+  {
+    src: "/gallery/expert-session-skillage.jpg",
+    alt: "Soofiya Binth Shajahan speaking in front of a large screen during a session at Skillage Digital Academy",
+    caption: "Expert session at Skillage Digital Academy",
+    category: "Talks & Events",
+    width: 2000,
+    height: 1333,
+  },
+  {
+    src: "/gallery/hands-on-lab-session.jpg",
+    alt: "Soofiya Binth Shajahan guiding students at their computers during a hands-on lab",
+    caption: "Guiding students through a hands-on lab",
+    category: "Workshops",
+    width: 1200,
+    height: 1600,
+  },
+  {
+    src: "/gallery/talk-at-skillage.jpg",
+    alt: "Soofiya Binth Shajahan explaining a concept to learners during a talk",
+    caption: "Explaining a concept during a live session",
+    category: "Talks & Events",
+    width: 2000,
+    height: 1333,
+  },
+  {
+    src: "/gallery/prompting-workshop-whiteboard.jpg",
+    alt: "Soofiya Binth Shajahan teaching a workshop, with context and constraints written on the whiteboard",
+    caption: "Prompting workshop: context, constraints and output formats",
+    category: "Workshops",
+    width: 960,
+    height: 1280,
+  },
+  {
+    src: "/portrait.jpg",
+    alt: "Soofiya Binth Shajahan at work",
+    caption: "At work",
+    category: "Behind the scenes",
+    width: 1280,
+    height: 1280,
+  },
+];
+
+export const visibleTestimonials = (category?: Testimonial["category"]) =>
+  testimonials.filter((t) => (showSamples || !t.sample) && (!category || t.category === category));
+
+export const visibleGallery = () => gallery.filter((g) => showSamples || !g.sample);
