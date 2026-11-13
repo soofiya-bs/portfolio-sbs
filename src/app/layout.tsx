@@ -7,6 +7,8 @@ import { BackgroundFX } from "@/components/BackgroundFX";
 import { RevealObserver } from "@/components/motion";
 import { site, education } from "@/content/site";
 import { themeInitScript } from "@/components/ThemeToggle";
+import { WhatsAppFab } from "@/components/Contact";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-fraunces", display: "swap", axes: ["opsz"] });
@@ -72,6 +74,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         </a>
         <BackgroundFX />
         <RevealObserver />
+        <WhatsAppFab />
+        <Analytics />
         <div className="relative z-10">
           <Header />
           <main id="main">{children}</main>

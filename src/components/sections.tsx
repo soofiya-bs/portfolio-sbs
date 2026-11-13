@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { program, projects, services, education, experience } from "@/content/site";
 import { accent, Arrow, ButtonLink, Container, Tag } from "./ui";
+import { WhatsAppButton } from "./Contact";
 
 export function ServiceCards() {
   return (
@@ -170,6 +171,7 @@ export function CtaBand() {
               <ButtonLink href="/work-with-me?type=project" variant="ghost">
                 Hire me for a project <Arrow />
               </ButtonLink>
+              <WhatsAppButton />
             </div>
           </div>
         </div>

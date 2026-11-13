@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { nav, site } from "@/content/site";
+import { nav, site, whatsappLink } from "@/content/site";
 import { Container } from "./ui";
 
 const socialLabels: Record<string, string> = {
@@ -41,6 +41,11 @@ export function Footer() {
                   </a>
                 </li>
               ))}
+              <li>
+                <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="text-sm text-muted transition-colors hover:text-gold-soft">
+                  WhatsApp
+                </a>
+              </li>
               <li>
                 <a href={`mailto:${site.email}`} className="text-sm text-muted transition-colors hover:text-gold-soft">
                   {site.email}

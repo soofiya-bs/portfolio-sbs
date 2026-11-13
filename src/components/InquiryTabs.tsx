@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { inquiryForms, inquiryTypes, type InquiryType } from "@/content/forms";
+import { WA_MESSAGES, WhatsAppButton } from "./Contact";
 
 type Status = { state: "idle" | "sending" | "sent" | "error"; message?: string };
 
@@ -68,10 +69,15 @@ export function InquiryTabs({ initial }: { initial: InquiryType }) {
         {status.state === "sent" ? (
           <div className="mt-10 rounded-xl border border-gold/40 bg-gold/[0.06] p-6">
             <p className="font-serif text-2xl text-gold-soft">Thank you — it&apos;s in.</p>
-            <p className="mt-2 text-muted">I read every message personally and will get back to you soon.</p>
-            <button onClick={() => setStatus({ state: "idle" })} className="mt-5 text-sm text-gold-soft underline-offset-4 hover:underline">
-              Send another
-            </button>
+            <p className="mt-2 text-muted">
+              I read every message personally and will get back to you soon. For a faster reply, message me on WhatsApp too.
+            </p>
+            <div className="mt-5 flex flex-wrap items-center gap-4">
+              <WhatsAppButton message={WA_MESSAGES[active]} label="Message on WhatsApp" />
+              <button onClick={() => setStatus({ state: "idle" })} className="text-sm text-gold-soft underline-offset-4 hover:underline">
+                Send another
+              </button>
+            </div>
           </div>
         ) : (
           <form key={active} onSubmit={onSubmit} className="mt-10 grid gap-5 sm:grid-cols-2" noValidate={false}>
@@ -114,9 +120,10 @@ export function InquiryTabs({ initial }: { initial: InquiryType }) {
               </button>
             </div>
             {status.state === "error" && (
-              <p role="alert" className="text-sm text-red-700 sm:col-span-2">
-                {status.message}
-              </p>
+              <div role="alert" className="flex flex-col gap-3 rounded-xl border border-red-500/40 bg-red-500/[0.06] p-4 text-sm sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
+                <span className="text-red-500">{status.message}</span>
+                <WhatsAppButton message={WA_MESSAGES[active]} label="Send on WhatsApp instead" className="!py-2" />
+              </div>
             )}
           </form>
         )}

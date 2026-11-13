@@ -13,7 +13,15 @@ export const site = {
   description:
     "Soofiya Binth Shajahan is an applied AI engineer and mentor pursuing a BS at IIT Madras. Guided self-learning in applied AI engineering, expert AI sessions for institutions, and LLM applications and AI automation for companies.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com",
-  email: "soofiyashajahan@gmail.com",
+  email: "work.with.soofiya.bs@gmail.com",
+  /** WhatsApp number in international format, digits only (country code first). */
+  whatsapp: "919495389547",
+  whatsappMessage: "Hi Soofiya, I found your website and would like to know more.",
+  /**
+   * Free 15-min call booking link (Cal.com / Calendly). Leave empty to hide the
+   * "Book a free call" buttons; paste your link here to show them everywhere.
+   */
+  bookingUrl: "",
   location: "Hyderabad · Kerala, India",
   keywords: [
     "applied AI engineering",
@@ -317,6 +325,12 @@ export const skills = [
   "PostgreSQL", "Database design", "Docker", "Claude Code", "React", "Node.js",
   "TypeScript", "Java", "Spring Boot", "AWS",
 ];
+
+/** wa.me link with an optional pre-filled message */
+export function whatsappLink(message?: string) {
+  const text = encodeURIComponent(message ?? site.whatsappMessage);
+  return `https://wa.me/${site.whatsapp}?text=${text}`;
+}
 
 export const nav = [
   { label: "About", href: "/about" },

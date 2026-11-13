@@ -4,6 +4,7 @@ import { inquiryTypes, type InquiryType } from "@/content/forms";
 import { PageHero } from "@/components/PageHero";
 import { Section } from "@/components/ui";
 import { InquiryTabs } from "@/components/InquiryTabs";
+import { BookCallButton, WhatsAppButton } from "@/components/Contact";
 
 export const metadata: Metadata = {
   title: "Work With Me",
@@ -27,14 +28,20 @@ export default async function WorkWithMePage({ searchParams }: { searchParams: P
         }
         lead={
           <>
-            Learner, institution or company — choose the form that fits. Prefer email? Write to{" "}
+            Learner, institution or company — choose the form that fits, or message me directly on WhatsApp. Prefer
+            email? Write to{" "}
             <a href={`mailto:${site.email}`} className="text-gold-soft underline-offset-4 hover:underline">
               {site.email}
             </a>
             .
           </>
         }
-      />
+      >
+        <div className="mt-8 flex flex-col gap-3 border-t border-line pt-6 sm:flex-row">
+          <WhatsAppButton label="Chat on WhatsApp" />
+          <BookCallButton />
+        </div>
+      </PageHero>
       <Section className="!pt-14">
         <InquiryTabs initial={initial} />
       </Section>

@@ -4,6 +4,7 @@ import { PageHero } from "@/components/PageHero";
 import { accent, Arrow, ButtonLink, Section, SectionHeading } from "@/components/ui";
 import { CtaBand, ProgramSteps } from "@/components/sections";
 import { Testimonials } from "@/components/Testimonials";
+import { BookCallButton, WA_MESSAGES, WhatsAppButton } from "@/components/Contact";
 
 export const metadata: Metadata = {
   title: "SBS Personal Mentoring — One-to-One Full Stack AI Mentorship",
@@ -93,6 +94,8 @@ export default function MentorshipPage() {
               <ButtonLink href="/work-with-me?type=student">
                 Send an inquiry <Arrow />
               </ButtonLink>
+              <WhatsAppButton message={WA_MESSAGES.student} label="Ask on WhatsApp" />
+              <BookCallButton />
               <ButtonLink href={`mailto:${site.email}?subject=${encodeURIComponent(program.name + " inquiry")}`} variant="ghost">
                 Email me
               </ButtonLink>
