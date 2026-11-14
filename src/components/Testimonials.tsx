@@ -111,47 +111,42 @@ export function Testimonials({
     );
   }
 
-  // three or more: one featured quote with smaller ones beside it
+  // three or more: one featured quote with two beside it, then the rest in balanced rows
+  const side = rest.slice(0, 2);
+  const more = rest.slice(2);
+  const moreCols = more.length === 1 ? "" : more.length % 2 === 0 ? "md:grid-cols-2" : "md:grid-cols-2 lg:grid-cols-3";
+
+  const SmallQuote = ({ t, delay }: { t: Testimonial; delay: number }) => (
+    <figure
+      data-reveal
+      style={{ "--d": `${delay}ms` } as React.CSSProperties}
+      className="card relative flex flex-col justify-between p-7"
+    >
+      {t.sample && <SampleBadge />}
+      <blockquote className="pr-4 text-[15px] leading-relaxed text-muted">&ldquo;{t.quote}&rdquo;</blockquote>
+      <div className="mt-6">
+        <Person t={t} />
+      </div>
+    </figure>
+  );
+
   return (
     <Section className={className} id="testimonials">
       <SectionHeading eyebrow={eyebrow} title={title} />
 
       <div className="mt-14 grid gap-5 lg:grid-cols-[1.35fr_1fr]">
         <BigQuote t={featured} />
-
         <div className="grid gap-5">
-          {rest.slice(0, 3).map((t, i) => (
-            <figure
-              key={`${t.name}-${i}`}
-              data-reveal
-              style={{ "--d": `${(i + 1) * 100}ms` } as React.CSSProperties}
-              className="card relative flex flex-col justify-between p-7"
-            >
-              {t.sample && <SampleBadge />}
-              <blockquote className="pr-14 text-[15px] leading-relaxed text-muted">&ldquo;{t.quote}&rdquo;</blockquote>
-              <div className="mt-6">
-                <Person t={t} />
-              </div>
-            </figure>
+          {side.map((t, i) => (
+            <SmallQuote key={`${t.name}-${i}`} t={t} delay={(i + 1) * 100} />
           ))}
         </div>
       </div>
 
-      {rest.length > 3 && (
-        <div className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {rest.slice(3).map((t, i) => (
-            <figure
-              key={`${t.name}-more-${i}`}
-              data-reveal
-              style={{ "--d": `${(i % 3) * 100}ms` } as React.CSSProperties}
-              className="card relative flex flex-col justify-between p-7"
-            >
-              {t.sample && <SampleBadge />}
-              <blockquote className="pr-14 text-[15px] leading-relaxed text-muted">&ldquo;{t.quote}&rdquo;</blockquote>
-              <div className="mt-6">
-                <Person t={t} />
-              </div>
-            </figure>
+      {more.length > 0 && (
+        <div className={`mt-5 grid gap-5 ${moreCols}`}>
+          {more.map((t, i) => (
+            <SmallQuote key={`${t.name}-more-${i}`} t={t} delay={(i % 3) * 100} />
           ))}
         </div>
       )}

@@ -26,7 +26,7 @@ export const site = {
    * Resume PDF for recruiters, e.g. "/resume.pdf" (put the file in /public).
    * Leave empty to hide the "Download resume" buttons.
    */
-  resumeUrl: "",
+  resumeUrl: "/Soofiya_Binth_Shajahan_Resume.pdf",
   location: "Hyderabad · Kerala, India",
   keywords: [
     "applied AI engineering",
@@ -460,6 +460,16 @@ export const testimonials: Testimonial[] = [
     photo: "/testimonials/muhammed-aslam.jpg",
     photoFocus: "60% 31%",
     photoZoom: 2.7,
+  },
+  {
+    quote:
+      "Soofiya has been a valuable part of the team. Although her time with us was short, her contributions helped us build more efficient processes, improve team performance, and reduce project turnaround time through AI. She's not just a great engineer but also a great thinker whose ideas and insights helped guide the team throughout. We're truly grateful for her contributions and the impact she's made.",
+    name: "Afnan MPF",
+    role: "CEO, Yoweo",
+    category: "client",
+    photo: "/testimonials/afnan-mpf.webp",
+    photoFocus: "49% 40%",
+    photoZoom: 1.9,
   },
   {
     quote:
