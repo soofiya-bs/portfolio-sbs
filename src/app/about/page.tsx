@@ -18,7 +18,7 @@ export default function AboutPage() {
         eyebrow="About"
         title={
           <>
-            Engineer by craft. <span className="italic text-gold-gradient">Teacher by choice.</span>
+            Engineer by craft. <span className="italic text-gold-gradient">Mentor by choice.</span>
           </>
         }
         lead={site.tagline}

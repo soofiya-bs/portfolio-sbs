@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
-import { accent, Section } from "@/components/ui";
-import { CtaBand, ServiceCards } from "@/components/sections";
+import { accent, Section, SectionHeading } from "@/components/ui";
+import { CtaBand, ServiceCards, ServicePackages } from "@/components/sections";
 import { Testimonials } from "@/components/Testimonials";
 
 export const metadata: Metadata = {
@@ -32,6 +32,16 @@ export default function ServicesPage() {
       />
       <Section>
         <ServiceCards />
+      </Section>
+      <Section className="border-t border-line" id="packages">
+        <SectionHeading
+          eyebrow="AI development packages"
+          title="Clear scope. Real outcomes."
+          lead="Pick the starting point that fits where your product is today. Every package ends with something live and in use."
+        />
+        <div className="mt-14">
+          <ServicePackages />
+        </div>
       </Section>
       <Section className="border-t border-line">
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-faint">How engagements run</p>

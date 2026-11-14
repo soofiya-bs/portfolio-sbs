@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { program, site, skills, stats } from "@/content/site";
+import Link from "next/link";
+import { program, site, skills, stats, workedWith } from "@/content/site";
 import { accent, Arrow, ButtonLink, Container, Section, SectionHeading } from "@/components/ui";
 import { CtaBand, Credentials, ProgramSteps, ProjectCards, ServiceCards } from "@/components/sections";
 import { CountUp, Marquee, RotatingWord } from "@/components/motion";
@@ -14,7 +15,7 @@ const roles = [
     d: "I design and ship applied AI systems — LLM apps, RAG, agents — for real users and real constraints.",
   },
   {
-    k: "Teacher",
+    k: "Mentor",
     d: "I turn industry roadmaps into daily, doable steps and review every learner's work, every week.",
   },
   {
@@ -101,6 +102,15 @@ export default function Home() {
                 Hire me for a project
               </ButtonLink>
             </div>
+            <p data-reveal style={{ "--d": "320ms" } as React.CSSProperties} className="glass glass-neutral mt-7 inline-flex flex-wrap items-center gap-x-4 gap-y-2 !rounded-2xl px-4 py-3 text-sm text-muted">
+              <span className="inline-flex items-center gap-2">
+                <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-emerald" />
+                Open to AI engineer roles · remote &amp; on-site · Kerala, Hyderabad
+              </span>
+              <Link href="/hire" className="font-medium text-gold-soft underline-offset-4 hover:underline">
+                For recruiters →
+              </Link>
+            </p>
           </div>
 
           {/* Portrait with floating credibility chips */}
@@ -123,7 +133,7 @@ export default function Home() {
               <p className="mt-0.5 font-serif text-lg text-text">IIT Madras</p>
             </div>
             <div className="float-slower absolute -right-3 top-8 rounded-2xl border border-line bg-surface/90 px-4 py-3 shadow-lg sm:-right-6">
-              <p className="font-serif text-2xl text-text">6,800+</p>
+              <p className="font-serif text-2xl text-text">6,900+</p>
               <p className="text-xs text-muted">self-learners on Instagram</p>
             </div>
           </div>
@@ -135,15 +145,29 @@ export default function Home() {
 
       {/* STATS */}
       <section className="border-b border-line bg-surface/40">
-        <Container className="grid grid-cols-2 gap-y-8 py-10 md:grid-cols-4">
+        <Container className="flex flex-wrap justify-center gap-y-8 py-10">
           {stats.map((s, i) => (
-            <div key={s.label} data-reveal style={{ "--d": `${i * 90}ms` } as React.CSSProperties} className="text-center md:border-l md:border-line md:first:border-l-0">
+            <div key={s.label} data-reveal style={{ "--d": `${i * 90}ms` } as React.CSSProperties} className="basis-1/2 px-2 text-center md:basis-1/4 xl:basis-[14.285%]">
               <p className={`font-serif text-4xl ${accent(i).text}`}>
                 <CountUp value={s.value} />
               </p>
               <p className="mt-1 text-sm text-muted">{s.label}</p>
             </div>
           ))}
+        </Container>
+      </section>
+
+      {/* WORKED WITH */}
+      <section className="border-b border-line">
+        <Container className="flex flex-col gap-4 py-8 md:flex-row md:items-center md:gap-10">
+          <p className="shrink-0 font-mono text-[11px] uppercase tracking-[0.2em] text-faint">Built for &amp; taught with</p>
+          <ul className="flex flex-wrap gap-x-7 gap-y-2">
+            {workedWith.map((w) => (
+              <li key={w} className="text-sm font-medium text-muted">
+                {w}
+              </li>
+            ))}
+          </ul>
         </Container>
       </section>
 
@@ -156,7 +180,7 @@ export default function Home() {
               One person, <span className="italic text-gold-gradient">three crafts.</span>
             </>
           }
-          lead="Teaching makes me a sharper engineer. Building makes me a more honest teacher. Running both makes me accountable for results."
+          lead="Mentoring makes me a sharper engineer. Building makes me a more honest mentor. Running both makes me accountable for results."
         />
         <div className="mt-14 grid gap-5 md:grid-cols-3">
           {roles.map((r, i) => (
@@ -167,6 +191,19 @@ export default function Home() {
               <p className="relative mt-3 text-[15px] leading-relaxed text-muted">{r.d}</p>
             </div>
           ))}
+        </div>
+      </Section>
+
+      {/* PROJECTS */}
+      <Section className="border-t border-line">
+        <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+          <SectionHeading eyebrow="Selected work" title="Things I have built." />
+          <ButtonLink href="/projects" variant="ghost" className="shrink-0">
+            All projects <Arrow />
+          </ButtonLink>
+        </div>
+        <div className="mt-14">
+          <ProjectCards limit={4} />
         </div>
       </Section>
 
@@ -199,19 +236,6 @@ export default function Home() {
         />
         <div className="mt-14">
           <ServiceCards />
-        </div>
-      </Section>
-
-      {/* PROJECTS */}
-      <Section className="border-t border-line">
-        <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-          <SectionHeading eyebrow="Selected work" title="Things I have built." />
-          <ButtonLink href="/projects" variant="ghost" className="shrink-0">
-            All projects <Arrow />
-          </ButtonLink>
-        </div>
-        <div className="mt-14">
-          <ProjectCards limit={4} />
         </div>
       </Section>
 

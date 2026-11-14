@@ -29,7 +29,7 @@ export function RevealObserver() {
   return null;
 }
 
-/** Animates "6,800+" style values from 0 when scrolled into view. */
+/** Animates "6,900+" style values from 0 when scrolled into view. */
 export function CountUp({ value, className }: { value: string; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [text, setText] = useState(value);
@@ -48,7 +48,7 @@ export function CountUp({ value, className }: { value: string; className?: strin
         const start = performance.now();
         const dur = 1400;
         const tick = (now: number) => {
-          const t = Math.min(1, (now - start) / dur);
+          const t = Math.min(1, Math.max(0, (now - start) / dur)); // never negative: the first frame can be timestamped before `start`
           const eased = 1 - Math.pow(1 - t, 3);
           const n = Math.round(target * eased);
           setText(`${pre}${useComma ? n.toLocaleString("en-IN") : n}${post}`);

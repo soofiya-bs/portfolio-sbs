@@ -22,6 +22,11 @@ export const site = {
    * "Book a free call" buttons; paste your link here to show them everywhere.
    */
   bookingUrl: "",
+  /**
+   * Resume PDF for recruiters, e.g. "/resume.pdf" (put the file in /public).
+   * Leave empty to hide the "Download resume" buttons.
+   */
+  resumeUrl: "",
   location: "Hyderabad · Kerala, India",
   keywords: [
     "applied AI engineering",
@@ -50,7 +55,10 @@ export const site = {
 };
 
 export const stats = [
-  { value: "6,800+", label: "Learners on Instagram" },
+  { value: "6,900+", label: "Learners on Instagram" },
+  { value: "6,000+", label: "Followers on LinkedIn" },
+  { value: "15+", label: "Live projects" },
+  { value: "12+", label: "Countries my students come from" },
   { value: "4+", label: "Years of mentoring & development" },
   { value: "4", label: "Active platforms" },
   { value: "4+", label: "Countries worked with" },
@@ -60,7 +68,7 @@ export const stats = [
 export const bio = [
   "I'm an applied AI engineer focused on building practical AI applications, automation systems and useful developer tools. I'm pursuing a BS in Programming and Applications at IIT Madras, and I bring experience across software development, Python, technical education and community building.",
   "My current focus is turning real workflows into useful AI products — from LLM applications and automation to retrieval-based systems, agentic workflows and Python APIs. I like taking an unclear problem, building a simple working solution, and improving it through testing, feedback and iteration.",
-  "Teaching has been the other half of my work since 2023: lecturing in computer programming and mathematics, training polytechnic students in Python and AI, and now helping 6,800+ self-learners on Instagram understand applied AI engineering. Delivering AI sessions and consultations has taught me to translate technical ideas into practical solutions for non-technical people.",
+  "Teaching has been the other half of my work since 2023: lecturing in computer programming and mathematics, training polytechnic students in Python and AI, and now helping 6,900+ self-learners on Instagram and 6,000+ followers on LinkedIn understand applied AI engineering. Delivering AI sessions and consultations has taught me to translate technical ideas into practical solutions for non-technical people.",
 ];
 
 export const education = [
@@ -78,14 +86,17 @@ export const experience = [
     title: "Head of Artificial Intelligence",
     org: "Made For Easy",
     period: "Jun 2023 — Present · Kochi",
-    points: ["Lead AI product work at Made For Easy, shipping AI-powered platforms including Evermi, Skillage and ResumeAI."],
+    points: [
+      "Lead AI product work at Made For Easy.",
+      "Built the Skillage Assessment Tracker (about 600 active users, with voice-message updates for leadership) and an AI Resume Evaluator — both in use at Skillage Academy.",
+    ],
   },
   {
     kind: "Training",
     title: "Content Creator — AI Engineering",
     org: "Instagram",
     period: "May 2026 — Present",
-    points: ["Create Instagram content on AI engineering and software engineering for 6,800+ followers, making the concepts easy to learn for tech aspirants."],
+    points: ["Create Instagram content on AI engineering and software engineering for 6,900+ followers, making the concepts easy to learn for tech aspirants."],
   },
   {
     kind: "Development",
@@ -263,40 +274,82 @@ export const services = [
   },
 ];
 
-export const projects = [
-  {
-    slug: "evermi",
-    title: "Evermi — AI-Powered Beauty & Skincare E-Commerce",
-    meta: "Made For Easy · Oct 2026 — Present · Launching soon",
-    summary: "An AI-powered e-commerce platform for a beauty and skincare startup, building a smarter, more personal way to shop for skincare.",
-    tags: ["AI", "E-commerce", "Full-stack"],
-    link: "",
-    repo: "",
-  },
+export type Project = {
+  slug: string;
+  title: string;
+  meta?: string;
+  /** e.g. "Live" or "Launching soon" — shown as a badge */
+  status?: string;
+  summary: string;
+  /** concrete results, shown as a checklist */
+  highlights?: string[];
+  tags: string[];
+  link: string;
+  repo: string;
+};
+
+export const projects: Project[] = [
   {
     slug: "skillage",
-    title: "Skillage — AI-Powered Academic Manager",
-    meta: "Made For Easy · Oct — Nov 2026",
-    summary: "A web platform for training institutes to assign, evaluate and rank learner work, with AI-integrated assessment tracking.",
-    tags: ["AI", "EdTech", "Assessment"],
-    link: "",
+    title: "Skillage Assessment Tracker",
+    meta: "Made For Easy · In use at Skillage Academy",
+    status: "Live",
+    summary:
+      "An AI-integrated web platform for training institutes to assign, evaluate and rank learner work — replacing manual tracking across the academic department.",
+    highlights: [
+      "About 600 active users",
+      "Reduced the academic department's manual workload",
+      "Heads of department and the CEO get progress updates as voice messages",
+    ],
+    tags: ["AI", "EdTech", "Voice", "Full-stack"],
+    link: "https://skillage-assessment-tracker.vercel.app/",
     repo: "",
   },
   {
     slug: "resumeai",
-    title: "ResumeAI — AI-Powered Resume Analyzer",
-    meta: "Made For Easy · Sep 2026",
-    summary: "A full-stack web app where job seekers upload a resume and a target job description and get AI feedback on how to communicate their value.",
-    tags: ["LLM", "Full-stack", "Document analysis"],
-    link: "",
+    title: "AI Resume Evaluator",
+    meta: "Made For Easy · In use at Skillage Academy",
+    status: "Live",
+    summary:
+      "An AI system that evaluates student resumes against target roles and gives clear, actionable feedback — used by Skillage Academy for both student coaching and hiring.",
+    highlights: [
+      "In daily use at Skillage Academy",
+      "Evaluates student resumes and suggests improvements",
+      "Supports the academy's hiring process",
+    ],
+    tags: ["LLM", "Document analysis", "Full-stack"],
+    link: "https://resumeai-soofiya.vercel.app/",
+    repo: "",
+  },
+  {
+    slug: "evermi",
+    title: "Evermi — AI-Powered Beauty & Skincare Platform",
+    meta: "Made For Easy · Oct 2026 — Present · Full production build in progress",
+    status: "MVP live",
+    summary:
+      "Taking a beauty and skincare startup from MVP to a production-grade e-commerce platform — with Mia, a voice-enabled AI shopping assistant that recommends products grounded in the store's own catalog.",
+    highlights: [
+      "Mia AI assistant: talk or type about skin concerns and routines, with speech-to-text input and natural voice replies",
+      "Recommendations and ingredient answers come only from approved product records — no made-up claims",
+      "Full store: catalog with ingredients and routines, search and filters, cart, wishlist, checkout and order tracking",
+      "Admin dashboard for sales, orders and catalog, plus Razorpay / Stripe payments, email and courier integrations",
+    ],
+    tags: ["Voice AI", "LLM", "E-commerce", "Full-stack", "Payments"],
+    link: "https://mhakaie.vercel.app/",
     repo: "",
   },
   {
     slug: "made-for-easy-health",
     title: "Made For Easy — Digital Health Records",
-    meta: "Made For Easy",
-    summary: "A centralised health records system with doctor appointment booking, lab test scheduling and encrypted medical data storage.",
-    tags: ["MERN", "Socket.IO", "Stripe"],
+    meta: "Made For Easy · Healthcare",
+    summary:
+      "A centralised digital health records platform that brings a patient's records, doctor appointments and lab tests together in one secure place.",
+    highlights: [
+      "Doctor appointment booking and lab test scheduling in one flow",
+      "Encrypted storage for sensitive medical records",
+      "Real-time updates with Socket.IO and online payments with Stripe",
+    ],
+    tags: ["MERN", "Socket.IO", "Stripe", "Healthcare"],
     link: "",
     repo: "",
   },
@@ -339,8 +392,11 @@ export const nav = [
   { label: "Projects", href: "/projects" },
   { label: "Blog", href: "/blog" },
   { label: "Tutorials", href: "/tutorials" },
-  { label: "Gallery", href: "/gallery" },
+  { label: "Hire me", href: "/hire" },
 ];
+
+/** Extra links shown only in the footer */
+export const footerNav = [{ label: "Gallery", href: "/gallery" }];
 
 /* ─────────────────────────────────────────────────────────────
  *  TESTIMONIALS & GALLERY
@@ -358,8 +414,12 @@ export type Testimonial = {
   role: string;
   /** who it's from — controls which pages show it */
   category: "student" | "institution" | "client";
-  /** optional square photo in /public/testimonials/ */
+  /** optional photo in /public/testimonials/ */
   photo?: string;
+  /** where the face is in the photo, e.g. "60% 31%" (default "50% 34%") */
+  photoFocus?: string;
+  /** how far to zoom into the face (default 1.7) */
+  photoZoom?: number;
   sample?: boolean;
 };
 
@@ -375,7 +435,33 @@ export type Testimonial = {
  *     photo: "/testimonials/name.jpg", // optional
  *   },
  */
-export const testimonials: Testimonial[] = [];
+export const testimonials: Testimonial[] = [
+  {
+    quote:
+      "You never make us feel hesitant to ask questions. You patiently listen to our doubts, clarify them, and help us understand things better. You are not just a mentor to me — you are like an elder sister who stands beside me, encourages me, and guides me whenever I need support. … Your guidance gives me more clarity, confidence, and motivation to keep learning and improving.",
+    name: "Hasna Fidha",
+    role: "Applied AI Student · SBS Personal Mentoring",
+    category: "student",
+    photo: "/testimonials/hasna-fidha.webp",
+  },
+  {
+    quote:
+      "Learning from Soofiya Ma'am has been a great experience. Ma'am's knowledge of AI Engineering, simple teaching approach, and constant guidance make Ma'am an inspiring mentor. Truly grateful for the guidance, support, and valuable lessons.",
+    name: "Muhammed Aslam",
+    role: "Applied AI Student · SBS Personal Mentoring",
+    category: "student",
+    photo: "/testimonials/muhammed-aslam.jpg",
+    photoFocus: "60% 31%",
+    photoZoom: 2.7,
+  },
+  {
+    quote:
+      "Miss Soofiya is very professional and kind. She is very patient all the time to understand our requirements. The project delivery was on time, and everything was perfect.",
+    name: "Rishad",
+    role: "Client · Evermi",
+    category: "client",
+  },
+];
 
 export type GalleryItem = {
   /** image in /public/gallery/ — leave empty on samples */
@@ -444,3 +530,83 @@ export const visibleTestimonials = (category?: Testimonial["category"]) =>
   testimonials.filter((t) => (showSamples || !t.sample) && (!category || t.category === category));
 
 export const visibleGallery = () => gallery.filter((g) => showSamples || !g.sample);
+
+/* ─────────────────────────────────────────────────────────────
+ *  HIRING & PACKAGES
+ * ───────────────────────────────────────────────────────────── */
+
+/** Organisations I've built for or taught with — shown as a "worked with" strip. */
+export const workedWith = [
+  "Skillage Academy",
+  "Made For Easy",
+  "CortexIntel (UK)",
+  "Brototype",
+  "90+ My Tuition (UAE)",
+  "Govt Model Polytechnic College",
+  "Knowlix Learning",
+  "Escola International School",
+];
+
+/** The recruiter-facing summary on /hire. Only verified facts. */
+export const hire = {
+  headline: "Applied AI engineer who ships — and explains it clearly.",
+  lead:
+    "I build production AI: LLM applications, retrieval-based systems, voice AI and automations that real teams use every day. I'm open to Applied AI Engineer / AI Developer roles — remote or on-site in Kerala and Hyderabad — and to selected contract work.",
+  roles: ["Applied AI Engineer", "AI Developer", "LLM / GenAI Engineer", "AI Automation Engineer"],
+  facts: [
+    { k: "Open to", v: "Remote & on-site roles · Kerala · Hyderabad" },
+    { k: "Education", v: "BS in Programming and Applications, IIT Madras (ongoing)" },
+    { k: "Experience", v: "4+ years across AI development and technical training" },
+    { k: "Current", v: "Head of Artificial Intelligence, Made For Easy" },
+  ],
+  impact: [
+    { metric: "~600", label: "active users on the Skillage Assessment Tracker I built — it cut the academic team's manual work" },
+    { metric: "2", label: "AI products in daily use at Skillage Academy, including a resume evaluator used in hiring" },
+    { metric: "15+", label: "live projects shipped, from MVPs to production platforms" },
+    { metric: "Voice AI", label: "built Mia, a speech-enabled shopping assistant grounded in a product catalog (Evermi)" },
+  ],
+  skills: [
+    { group: "AI & LLMs", items: ["LLM applications", "RAG & retrieval", "AI agents", "Voice AI (speech-to-text / text-to-speech)", "Prompt design & evaluation", "AI automation"] },
+    { group: "Backend & data", items: ["Python", "Python APIs", "Node.js", "Java · Spring Boot", "PostgreSQL", "Database design"] },
+    { group: "Frontend & cloud", items: ["React", "TypeScript", "Full-stack delivery", "Docker", "AWS", "Claude Code"] },
+  ],
+  strengths: [
+    { t: "End-to-end ownership", d: "From scoping and architecture to a deployed product that users rely on — not just a notebook demo." },
+    { t: "Clear communicator", d: "Years of teaching mean I can explain AI decisions to engineers, founders and non-technical stakeholders." },
+    { t: "Product-minded", d: "As Head of AI, I think in outcomes: less manual work, faster decisions, measurable usage." },
+    { t: "Fast learner, IIT-trained", d: "Studying at IIT Madras alongside full-time work — comfortable picking up new tools and domains quickly." },
+  ],
+};
+
+/** Productized offers for companies. No prices — every project gets a written quote. */
+export const packages = [
+  {
+    name: "AI Automation Sprint",
+    for: "Teams drowning in a repetitive manual process",
+    timeline: "1–2 weeks",
+    outcome: "One manual workflow turned into an AI-powered one, live and in use.",
+    includes: ["Workflow audit & success metric", "AI automation built and deployed", "Handover, docs and a walkthrough"],
+  },
+  {
+    name: "AI MVP Build",
+    for: "Founders who need a working AI product to test with users",
+    timeline: "3–6 weeks",
+    outcome: "A deployed full-stack MVP with real AI features your users can try.",
+    includes: ["Product scoping & architecture", "Full-stack app with LLM / RAG features", "Deployed MVP, demo and next-step roadmap"],
+    featured: true,
+  },
+  {
+    name: "Production AI Platform",
+    for: "Products ready to scale beyond an MVP",
+    timeline: "12–16 weeks",
+    outcome: "A secure, production-grade platform — like Evermi, with a voice AI assistant.",
+    includes: ["Backend architecture, database & admin dashboard", "Chat / voice AI assistant grounded in your data", "Payments, integrations, security & launch"],
+  },
+  {
+    name: "AI Support Retainer",
+    for: "Live AI products that need to stay healthy",
+    timeline: "Monthly",
+    outcome: "Monitoring, fixes and steady improvements, with priority support.",
+    includes: ["Uptime and health monitoring", "Bug fixes, security & dependency updates", "Small enhancements each month"],
+  },
+];

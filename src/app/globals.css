@@ -529,3 +529,15 @@ select.field option {
   from { opacity: 0; transform: scale(0.985); }
   to { opacity: 1; transform: none; }
 }
+
+/* Neutral glass: same frosted blur, but no gold sheen and no colour boost
+   from the glows behind it (used for small UI panels like the hero "open to roles" line). */
+.glass.glass-neutral {
+  background: color-mix(in srgb, var(--ink) 62%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(100%);
+  backdrop-filter: blur(18px) saturate(100%);
+}
+.glass.glass-neutral::before {
+  background: linear-gradient(125deg, var(--glass-shine) 0%, transparent 40%);
+  opacity: 0.4;
+}

@@ -25,7 +25,7 @@ export function Header() {
         scrolled || open ? "border-b border-line bg-ink/85 backdrop-blur-xl" : "border-b border-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
+      <div className="flex h-16 w-full items-center justify-between px-5 sm:px-8 lg:px-12">
         <Link href="/" className="group flex items-center gap-3" aria-label={`${site.name} — home`}>
           <span className="grid h-9 w-9 place-items-center rounded-full border border-gold/50 font-serif text-sm text-gold transition-colors group-hover:bg-gold group-hover:text-ink">
             {site.shortName}

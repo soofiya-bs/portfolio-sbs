@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { program, projects, services, education, experience } from "@/content/site";
+import { program, projects, services, education, experience, packages, type Project } from "@/content/site";
 import { accent, Arrow, ButtonLink, Container, Tag } from "./ui";
 import { WhatsAppButton } from "./Contact";
 
@@ -51,39 +51,94 @@ export function ProgramSteps() {
   );
 }
 
+export const isLive = (status?: string) => !!status && status.toLowerCase().includes("live");
+
+function ExternalIcon() {
+  return (
+    <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
+      <path d="M9 3h4v4M13 3L7 9M11.5 9.5V13H3V4.5h3.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/** One project card (used on Home, Projects and Hire me). */
+export function ProjectCard({ p, index }: { p: Project; index: number }) {
+  const live = isLive(p.status);
+  return (
+    <article
+      data-reveal
+      style={{ "--d": `${(index % 2) * 110}ms` } as React.CSSProperties}
+      className="card group relative flex flex-col overflow-hidden p-7"
+    >
+      <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full glow-gold opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-xs text-faint">
+        <span>/{String(index + 1).padStart(2, "0")}</span>
+        {p.status && (
+          <span
+            className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] ${
+              live ? "border-emerald/40 bg-emerald/10 text-emerald" : "border-line-strong text-muted"
+            }`}
+          >
+            {live && <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-emerald" />}
+            {p.status}
+          </span>
+        )}
+        {p.meta && <span className="text-muted">{p.meta}</span>}
+      </div>
+      <h3 className="mt-3 font-serif text-2xl leading-snug text-text">{p.title}</h3>
+      <p className="mt-3 text-[15px] leading-relaxed text-muted">{p.summary}</p>
+      {p.highlights && p.highlights.length > 0 && (
+        <ul className="mt-5 space-y-2 border-t border-line pt-5">
+          {p.highlights.map((h) => (
+            <li key={h} className="flex gap-2.5 text-sm text-text/90">
+              <svg viewBox="0 0 16 16" className="mt-0.5 h-4 w-4 shrink-0 text-emerald" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <path d="M3.5 8.5l3 3 6-7" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              {h}
+            </li>
+          ))}
+        </ul>
+      )}
+      <div className="mt-6 flex flex-wrap gap-2">
+        {p.tags.map((t) => (
+          <Tag key={t}>{t}</Tag>
+        ))}
+      </div>
+      {(p.link || p.repo) && (
+        <div className="mt-auto flex flex-wrap gap-3 pt-7">
+          {p.link && (
+            <a
+              href={p.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${p.status === "Live" ? "Visit live app" : "View preview"}: ${p.title} (opens in a new tab)`}
+              className="inline-flex items-center gap-2 rounded-full border border-gold/50 px-4 py-2 text-sm font-medium text-gold-soft transition-colors hover:bg-gold hover:text-ink"
+            >
+              {p.status === "Live" ? "Visit live app" : "View preview"} <ExternalIcon />
+            </a>
+          )}
+          {p.repo && (
+            <a
+              href={p.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-line-strong px-4 py-2 text-sm text-muted transition-colors hover:text-text"
+            >
+              Code <ExternalIcon />
+            </a>
+          )}
+        </div>
+      )}
+    </article>
+  );
+}
+
 export function ProjectCards({ limit }: { limit?: number }) {
   const list = limit ? projects.slice(0, limit) : projects;
   return (
     <div className="grid gap-5 sm:grid-cols-2">
       {list.map((p, i) => (
-        <article key={p.slug} data-reveal style={{ "--d": `${(i % 2) * 110}ms` } as React.CSSProperties} className="card group relative overflow-hidden p-7">
-          <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full glow-gold opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-          <p className="font-mono text-xs text-faint">
-            /{String(i + 1).padStart(2, "0")}
-            {p.meta && <span className="ml-3 text-muted">{p.meta}</span>}
-          </p>
-          <h3 className="mt-3 font-serif text-2xl leading-snug text-text">{p.title}</h3>
-          <p className="mt-3 text-[15px] leading-relaxed text-muted">{p.summary}</p>
-          <div className="mt-6 flex flex-wrap gap-2">
-            {p.tags.map((t) => (
-              <Tag key={t}>{t}</Tag>
-            ))}
-          </div>
-          {(p.link || p.repo) && (
-            <div className="mt-6 flex gap-5 text-sm">
-              {p.link && (
-                <a href={p.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-gold-soft hover:text-gold">
-                  Live <Arrow />
-                </a>
-              )}
-              {p.repo && (
-                <a href={p.repo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-muted hover:text-text">
-                  Code <Arrow />
-                </a>
-              )}
-            </div>
-          )}
-        </article>
+        <ProjectCard key={p.slug} p={p} index={i} />
       ))}
     </div>
   );
@@ -177,5 +232,52 @@ export function CtaBand() {
         </div>
       </Container>
     </section>
+  );
+}
+
+/** Productized AI development offers for companies (no prices — each gets a written quote). */
+export function ServicePackages() {
+  return (
+    <div>
+      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        {packages.map((p, i) => (
+          <article
+            key={p.name}
+            data-reveal
+            style={{ "--d": `${i * 90}ms` } as React.CSSProperties}
+            className={`card relative flex flex-col p-7 ${p.featured ? "border-gold/50" : ""}`}
+          >
+            {p.featured && (
+              <span className="absolute -top-3 left-7 rounded-full bg-btn px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-btn-fg">
+                Most requested
+              </span>
+            )}
+            <p className={`font-mono text-[11px] uppercase tracking-[0.18em] ${accent(i).text}`}>{p.timeline}</p>
+            <h3 className="mt-3 font-serif text-2xl leading-snug text-text">{p.name}</h3>
+            <p className="mt-2 text-sm text-faint">For: {p.for}</p>
+            <p className="mt-4 text-[15px] leading-relaxed text-muted">{p.outcome}</p>
+            <ul className="mt-6 space-y-2.5 border-t border-line pt-5">
+              {p.includes.map((x) => (
+                <li key={x} className="flex gap-2.5 text-sm text-text/90">
+                  <svg viewBox="0 0 16 16" className="mt-0.5 h-4 w-4 shrink-0 text-emerald" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                    <path d="M3.5 8.5l3 3 6-7" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  {x}
+                </li>
+              ))}
+            </ul>
+            <Link
+              href={`/work-with-me?type=project`}
+              className={`mt-auto inline-flex items-center gap-2 pt-8 text-sm font-medium transition-opacity hover:opacity-75 ${accent(i).text}`}
+            >
+              Discuss this <Arrow />
+            </Link>
+          </article>
+        ))}
+      </div>
+      <p className="mt-8 text-center text-sm text-muted">
+        Every project starts with a discovery call and a written proposal — fixed scope, timeline and cost before any work begins.
+      </p>
+    </div>
   );
 }
