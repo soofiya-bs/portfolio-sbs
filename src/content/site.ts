@@ -173,7 +173,7 @@ export const certifications = [
 export const program = {
   name: "SBS Personal Mentoring",
   summary:
-    "A one-to-one, self-paced mentoring program in Full Stack AI, with a MERN + AI direction. You follow a structured weekly roadmap, learn from carefully chosen online resources, and meet for a review every seventh day — so your self-learning has structure and direction.",
+    "A one-to-one, self-paced mentoring program in Applied AI and Agentic AI, with a MERN + AI direction. You follow a structured weekly roadmap, learn from carefully chosen online resources, and meet for a review every seventh day — so your self-learning has structure and direction.",
   steps: [
     {
       title: "Orientation",
@@ -195,7 +195,7 @@ export const program = {
   glance: [
     { k: "Format", v: "One-to-one mentoring" },
     { k: "Learning model", v: "Self-paced, with a weekly roadmap and guidance" },
-    { k: "Focus", v: "Full Stack AI — MERN + AI direction" },
+    { k: "Focus", v: "Applied AI & Agentic AI — MERN + AI direction" },
     { k: "Weekly rhythm", v: "6 days of guided learning, review on day 7" },
     { k: "Daily commitment", v: "8 hours (full-time) · 4 hours (working learners)" },
     { k: "Live sessions", v: "Google Meet" },
@@ -252,7 +252,7 @@ export const services = [
     id: "mentoring",
     eyebrow: "For learners",
     title: "SBS Personal Mentoring",
-    body: "One-to-one, self-paced learning in Full Stack AI (MERN + AI), on a weekly roadmap with a review every seventh day.",
+    body: "One-to-one, self-paced learning in Applied AI & Agentic AI (MERN + AI), on a weekly roadmap with a review every seventh day.",
     points: ["One-to-one mentoring", "Weekly roadmap, day-by-day plan", "Day-7 review on Google Meet", "Contact to join"],
     cta: { label: "Apply as a student", href: "/work-with-me?type=student" },
   },
@@ -436,6 +436,13 @@ export type Testimonial = {
  *   },
  */
 export const testimonials: Testimonial[] = [
+  {
+    quote:
+      "What I love about Soofiya is that she first understood my background, then she understood my goals, and then she helped me achieve what I want. I came from a 7+ year graphic design background — now I am building agents and working as an Agentic AI Engineer.",
+    name: "Abdul Masood",
+    role: "Agentic AI Student · SBS Personal Mentoring · UAE",
+    category: "student",
+  },
   {
     quote:
       "You never make us feel hesitant to ask questions. You patiently listen to our doubts, clarify them, and help us understand things better. You are not just a mentor to me — you are like an elder sister who stands beside me, encourages me, and guides me whenever I need support. … Your guidance gives me more clarity, confidence, and motivation to keep learning and improving.",

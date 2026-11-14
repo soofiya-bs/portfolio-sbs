@@ -7,9 +7,9 @@ import { Testimonials } from "@/components/Testimonials";
 import { BookCallButton, WA_MESSAGES, WhatsAppButton } from "@/components/Contact";
 
 export const metadata: Metadata = {
-  title: "SBS Personal Mentoring — One-to-One Full Stack AI Mentorship",
+  title: "SBS Personal Mentoring — One-to-One Applied AI & Agentic AI Mentorship",
   description:
-    "One-to-one, self-paced mentoring in Full Stack AI (MERN + AI) with a weekly roadmap, day-by-day plan and a review every seventh day on Google Meet. Contact to join.",
+    "One-to-one, self-paced mentoring in Applied AI and Agentic AI (MERN + AI) with a weekly roadmap, day-by-day plan and a review every seventh day on Google Meet. Contact to join.",
   alternates: { canonical: "/mentorship" },
 };
 
@@ -26,7 +26,7 @@ export default function MentorshipPage() {
   const courseJsonLd = {
     "@context": "https://schema.org",
     "@type": "Course",
-    name: `${program.name} — Full Stack AI Mentorship`,
+    name: `${program.name} — Applied AI & Agentic AI Mentorship`,
     description: program.summary,
     provider: { "@type": "Person", name: site.name, url: site.url },
   };
@@ -37,7 +37,7 @@ export default function MentorshipPage() {
         eyebrow={program.name}
         title={
           <>
-            Learn Full Stack AI on a roadmap — <span className="italic text-gold-gradient">not on your own.</span>
+            Learn Applied AI &amp; Agentic AI on a roadmap — <span className="italic text-gold-gradient">not on your own.</span>
           </>
         }
         lead={program.summary}
@@ -66,7 +66,7 @@ export default function MentorshipPage() {
         <div className="grid gap-12 lg:grid-cols-2">
           <SectionHeading
             eyebrow="Focus areas"
-            title="Full Stack AI, with a MERN + AI direction."
+            title="Applied AI & Agentic AI, with a MERN + AI direction."
             lead="Your exact roadmap and pace are set with you during orientation, based on where you are starting from."
           />
           <ul className="grid gap-3 self-end">

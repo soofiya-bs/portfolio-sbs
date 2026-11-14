@@ -97,12 +97,12 @@ export function Testimonials({
     </figure>
   );
 
-  // one or two quotes: give each the full, large treatment
-  if (list.length <= 2) {
+  // one, two or four quotes: give each the full, large treatment (1 centred, 2 side by side, 4 in a 2×2 grid)
+  if (list.length <= 2 || list.length === 4) {
     return (
       <Section className={className} id="testimonials">
         <SectionHeading eyebrow={eyebrow} title={title} />
-        <div className={`mt-14 grid gap-5 ${list.length === 2 ? "lg:grid-cols-2" : "mx-auto max-w-4xl"}`}>
+        <div className={`mt-14 grid gap-5 ${list.length > 1 ? "lg:grid-cols-2" : "mx-auto max-w-4xl"}`}>
           {list.map((t, i) => (
             <BigQuote key={`${t.name}-${i}`} t={t} delay={i * 110} solo={list.length === 1} />
           ))}
