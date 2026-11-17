@@ -22,6 +22,8 @@ import { useEffect, useRef } from "react";
 
 type RGB = [number, number, number];
 const GRAPH_KINDS = ["line", "bars", "scatter", "spline", "loss", "bell", "sigmoid", "roc", "wave", "gauge"] as const;
+/** Only smooth, curved graphs appear in the background. */
+const CURVED_KINDS = ["spline", "loss", "bell", "sigmoid", "roc", "wave"] as const;
 type GraphKind = (typeof GRAPH_KINDS)[number];
 type GlyphKind = "num" | GraphKind;
 type Glyph = {
@@ -66,20 +68,37 @@ const rgba = ([r, g, b]: RGB, a: number) => `rgba(${r},${g},${b},${Math.max(0, M
 
 function makeNumber(): string {
   const gens = [
+    // numbers
     () => rand(0, 1).toFixed(3),
     () => `${rand(82, 99.6).toFixed(1)}%`,
-    () => pick(["128", "256", "512", "1,024", "2,048", "4,096", "8k", "32k"]),
+    () => pick(["128", "256", "512", "1,024", "2,048", "4,096"]),
     () => `loss ${rand(0.02, 0.6).toFixed(3)}`,
     () => `acc ${rand(0.81, 0.99).toFixed(2)}`,
-    () => `epoch ${Math.floor(rand(1, 60))}`,
     () => `λ=${pick(["0.01", "0.001", "1e-4", "3e-5"])}`,
-    () => `p=${rand(0.001, 0.05).toFixed(3)}`,
-    () => pick(["Σ", "∂", "σ", "∇", "θ", "μ", "π", "∞", "≈", "ŷ"]),
-    () => `0x${Math.floor(rand(16, 4095)).toString(16).toUpperCase()}`,
     () => `[${rand(-1, 1).toFixed(2)}, ${rand(-1, 1).toFixed(2)}]`,
-    () => `${Math.floor(rand(10, 999))}ms`,
-    () => `F1 ${rand(0.8, 0.97).toFixed(2)}`,
-    () => `AUC ${rand(0.86, 0.99).toFixed(2)}`,
+    // maths symbols
+    () => pick(["Σ", "∫", "∂", "∇", "√", "π", "∞", "θ", "μ", "σ", "λ", "≈", "≠", "±", "Δ", "ŷ"]),
+    () => pick(["Σ", "∫", "∂", "∇", "π", "∞", "θ", "σ"]),
+    // short equations
+    () =>
+      pick([
+        "∫ f(x) dx",
+        "∂L/∂w",
+        "y = wx + b",
+        "√2 ≈ 1.414",
+        "π ≈ 3.1416",
+        "Σx / n",
+        "P(A|B)",
+        "σ(z) = 1/(1+e^-z)",
+        "∇θ J(θ)",
+        "e^x",
+        "f(x) = x²",
+        "softmax(z)",
+        "x̄ ± σ",
+        "lim n→∞",
+        "dy/dx",
+        "‖v‖",
+      ]),
   ];
   return pick(gens)();
 }
@@ -246,7 +265,7 @@ export function BackgroundFX() {
       return g;
     };
 
-    const spawnGraph = () => spawnGlyph(pick(GRAPH_KINDS));
+    const spawnGraph = () => spawnGlyph(pick(CURVED_KINDS));
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
@@ -270,7 +289,7 @@ export function BackgroundFX() {
 
       const area = w * h;
       const numCount = Math.max(10, Math.min(18, Math.round(area / 70000)));
-      const graphCount = w < 700 ? 3 : Math.max(5, Math.min(8, Math.round(area / 170000)));
+      const graphCount = w < 700 ? 2 : Math.max(4, Math.min(6, Math.round(area / 220000)));
       glyphs = [
         ...Array.from({ length: numCount }, () => {
           const g = spawnGlyph("num");
@@ -279,8 +298,8 @@ export function BackgroundFX() {
         }),
         ...Array.from({ length: graphCount }, (_, i) => {
           // first pass: one of each curved kind, so every visit shows variety
-          const curved: GraphKind[] = ["spline", "bell", "sigmoid", "roc", "loss", "gauge"];
-          const g = spawnGlyph(i < curved.length ? curved[i] : pick(GRAPH_KINDS));
+          const curved: GraphKind[] = [...CURVED_KINDS];
+          const g = spawnGlyph(i < curved.length ? curved[i] : pick(CURVED_KINDS));
           g.age = rand(0, g.life * 0.7);
           return g;
         }),
