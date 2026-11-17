@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { bio, certifications, site, skills, writing } from "@/content/site";
+import { bio, certifications, site, writing } from "@/content/site";
 import { PageHero } from "@/components/PageHero";
 import { Section } from "@/components/ui";
-import { CtaBand, Credentials } from "@/components/sections";
+import { CtaBand, Credentials, SkillGroups } from "@/components/sections";
 
 export const metadata: Metadata = {
   title: "About",
@@ -49,19 +49,15 @@ export default function AboutPage() {
               Open to Applied AI Engineer / AI Developer roles in Hyderabad, selected AI automation and LLM application
               projects, and collaborations on useful, deployed AI products.
             </p>
-            <div className="flex flex-wrap gap-2 pt-4">
-              {skills.map((s) => (
-                <span key={s} className="rounded-full border border-line px-3 py-1.5 font-mono text-xs text-muted">
-                  {s}
-                </span>
-              ))}
-            </div>
           </div>
         </div>
       </Section>
 
       <Section className="border-t border-line">
         <Credentials />
+        <div className="mt-14 border-t border-line pt-12">
+          <SkillGroups />
+        </div>
       </Section>
 
       <Section className="border-t border-line">

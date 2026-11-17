@@ -2,22 +2,66 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { nav, site } from "@/content/site";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { nav, navCta, site } from "@/content/site";
 import { ThemeToggle } from "./ThemeToggle";
 
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
+  const panel = useRef<HTMLDivElement>(null);
 
+  const close = useCallback((returnFocus = true) => {
+    setOpen(false);
+    // the menu button stays mounted, so focus can move back to it straight away
+    if (returnFocus) menuButton.current?.focus();
+  }, []);
+
+  // close the menu after navigating
   useEffect(() => setOpen(false), [pathname]);
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // mobile menu: Escape closes, Tab stays inside (focus trap), first link gets focus
+  useEffect(() => {
+    if (!open) return;
+    const focusables = () =>
+      Array.from(panel.current?.querySelectorAll<HTMLElement>("a[href], button:not([disabled])") ?? []).concat(
+        menuButton.current ? [menuButton.current] : []
+      );
+    focusables()[0]?.focus();
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        close();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const items = focusables();
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open, close]);
+
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <header
@@ -30,16 +74,17 @@ export function Header() {
           <span className="grid h-9 w-9 place-items-center rounded-full border border-gold/50 font-serif text-sm text-gold transition-colors group-hover:bg-gold group-hover:text-ink">
             {site.shortName}
           </span>
-          <span className="hidden whitespace-nowrap text-sm font-medium tracking-wide text-text sm:block lg:hidden xl:block">{site.name}</span>
+          <span className="hidden whitespace-nowrap text-sm font-medium tracking-wide text-text sm:block">{site.name}</span>
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex xl:gap-7" aria-label="Primary">
+        <nav className="hidden items-center gap-7 md:flex" aria-label="Primary">
           {nav.map((item) => {
-            const active = pathname.startsWith(item.href);
+            const active = isActive(item.href);
             return (
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={active ? "page" : undefined}
                 className={`text-sm transition-colors ${active ? "text-gold-soft" : "text-muted hover:text-text"}`}
               >
                 {item.label}
@@ -47,40 +92,58 @@ export function Header() {
             );
           })}
           <Link
-            href="/work-with-me"
-            className="whitespace-nowrap rounded-full border border-gold/50 px-4 py-2 text-sm text-gold-soft transition-colors hover:bg-gold hover:text-ink"
+            href={navCta.href}
+            aria-current={isActive(navCta.href) ? "page" : undefined}
+            className="whitespace-nowrap rounded-full bg-btn px-5 py-2 text-sm font-medium text-btn-fg transition-colors hover:bg-btn-hover"
           >
-            Work with me
+            {navCta.label}
           </Link>
           <ThemeToggle />
         </nav>
 
-        <div className="flex items-center gap-2 lg:hidden">
-        <ThemeToggle />
-        <button
-          className="grid h-10 w-10 place-items-center rounded-full border border-line"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-          aria-label="Toggle menu"
-        >
-          <span className="relative block h-3 w-4">
-            <span className={`absolute left-0 h-px w-4 bg-text transition-all ${open ? "top-1.5 rotate-45" : "top-0"}`} />
-            <span className={`absolute left-0 top-1.5 h-px w-4 bg-text transition-opacity ${open ? "opacity-0" : ""}`} />
-            <span className={`absolute left-0 h-px w-4 bg-text transition-all ${open ? "top-1.5 -rotate-45" : "top-3"}`} />
-          </span>
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            ref={menuButton}
+            type="button"
+            className="grid h-10 w-10 place-items-center rounded-full border border-line"
+            onClick={() => (open ? close() : setOpen(true))}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            aria-label={open ? "Close menu" : "Open menu"}
+          >
+            <span className="relative block h-3 w-4" aria-hidden="true">
+              <span className={`absolute left-0 h-px w-4 bg-text transition-all ${open ? "top-1.5 rotate-45" : "top-0"}`} />
+              <span className={`absolute left-0 top-1.5 h-px w-4 bg-text transition-opacity ${open ? "opacity-0" : ""}`} />
+              <span className={`absolute left-0 h-px w-4 bg-text transition-all ${open ? "top-1.5 -rotate-45" : "top-3"}`} />
+            </span>
+          </button>
         </div>
       </div>
 
       {open && (
-        <nav id="mobile-nav" className="border-t border-line px-5 pb-6 pt-2 sm:px-8 lg:hidden" aria-label="Mobile">
-          {[...nav, { label: "Work with me", href: "/work-with-me" }].map((item) => (
-            <Link key={item.href} href={item.href} className="block border-b border-line py-4 text-base text-text">
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <div ref={panel} id="mobile-nav" className="border-t border-line px-5 pb-6 pt-2 sm:px-8 md:hidden">
+          <nav aria-label="Mobile">
+            {nav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={isActive(item.href) ? "page" : undefined}
+                onClick={() => close(false)}
+                className="block border-b border-line py-4 text-base text-text"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <Link
+            href={navCta.href}
+            onClick={() => close(false)}
+            className="mt-5 flex w-full items-center justify-center rounded-full bg-btn px-6 py-3 text-sm font-medium text-btn-fg"
+          >
+            {navCta.label}
+          </Link>
+        </div>
       )}
     </header>
   );

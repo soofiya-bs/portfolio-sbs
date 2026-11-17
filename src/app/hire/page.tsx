@@ -8,7 +8,7 @@ import { WhatsAppIcon } from "@/components/Contact";
 export const metadata: Metadata = {
   title: "Hire Soofiya — Applied AI Engineer (Remote · Kerala · Hyderabad)",
   description:
-    "Applied AI engineer open to remote and on-site roles in Kerala and Hyderabad: LLM applications, RAG, voice AI and automation in production. IIT Madras, Head of AI at Made For Easy, 15+ live projects.",
+    "Applied AI engineer open to remote and on-site roles in Kerala and Hyderabad: LLM applications, RAG, voice AI and automation in production. IIT Madras, Head of AI at Made For Easy.",
   alternates: { canonical: "/hire" },
 };
 
@@ -131,7 +131,7 @@ export default function HirePage() {
       {/* Skills */}
       <Section className="border-t border-line">
         <SectionHeading eyebrow="Toolkit" title="What I work with." />
-        <div className="mt-12 grid gap-5 lg:grid-cols-3">
+        <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {hire.skills.map((g, i) => (
             <div key={g.group} data-reveal style={{ "--d": `${i * 100}ms` } as React.CSSProperties} className="card p-7">
               <h3 className={`font-mono text-xs uppercase tracking-[0.18em] ${accent(i).text}`}>{g.group}</h3>

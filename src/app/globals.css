@@ -11,7 +11,7 @@
   --line-strong: rgba(24, 24, 27, 0.18);
   --text: #16171b;
   --muted: #55565c;
-  --faint: #7c7c80;
+  --faint: #66676c;
   --gold: #8f6b25;
   --gold-soft: #74561b;
   --signal: #2f54c9;
@@ -57,7 +57,7 @@
   --line-strong: rgba(236, 232, 222, 0.18);
   --text: #ece8de;
   --muted: #a6a49f;
-  --faint: #7d7c80;
+  --faint: #8f8e93;
   --gold: #d6b16a;
   --gold-soft: #e9cf98;
   --signal: #7fa7ff;
@@ -88,7 +88,7 @@
     --line-strong: rgba(236, 232, 222, 0.18);
     --text: #ece8de;
     --muted: #a6a49f;
-    --faint: #7d7c80;
+    --faint: #8f8e93;
     --gold: #d6b16a;
     --gold-soft: #e9cf98;
     --signal: #7fa7ff;
@@ -540,4 +540,25 @@ select.field option {
 .glass.glass-neutral::before {
   background: linear-gradient(125deg, var(--glass-shine) 0%, transparent 40%);
   opacity: 0.4;
+}
+
+/* Keyboard focus: one clear, visible ring everywhere (mouse clicks don't show it) */
+:where(a, button, summary, [role="tab"], [tabindex]):focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.field:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Testimonial carousel: the centre card fades in when it changes */
+@keyframes tm-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+.tm-in { animation: tm-in 0.4s ease both; }
+@media (prefers-reduced-motion: reduce) {
+  .tm-in { animation: none; }
 }

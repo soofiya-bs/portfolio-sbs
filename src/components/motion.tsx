@@ -69,7 +69,11 @@ export function CountUp({ value, className }: { value: string; className?: strin
   );
 }
 
-/** Cycles through words with a slide/fade, keeping the widest word's space. */
+/**
+ * Cycles through words with a slide/fade, keeping the widest word's space.
+ * Purely visual: hidden from screen readers (the parent supplies one clean sentence
+ * in a visually-hidden span), and it stays on the first word for reduced-motion users.
+ */
 export function RotatingWord({ words, className = "" }: { words: string[]; className?: string }) {
   const [i, setI] = useState(0);
   useEffect(() => {
@@ -78,11 +82,10 @@ export function RotatingWord({ words, className = "" }: { words: string[]; class
     return () => clearInterval(id);
   }, [words.length]);
   return (
-    <span className={`relative inline-grid align-baseline ${className}`}>
+    <span aria-hidden="true" aria-live="off" className={`relative inline-grid align-baseline ${className}`}>
       {words.map((w, idx) => (
         <span
           key={w}
-          aria-hidden={idx !== i}
           className={`col-start-1 row-start-1 whitespace-nowrap transition-all ${
             idx === i
               ? "translate-y-0 opacity-100 delay-200 duration-500"

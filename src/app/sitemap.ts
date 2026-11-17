@@ -3,13 +3,13 @@ import { site } from "@/content/site";
 import { getAllPosts } from "@/lib/posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/about", "/mentorship", "/services", "/projects", "/blog", "/tutorials", "/gallery", "/hire", "/work-with-me"];
+  const routes = ["", "/about", "/mentorship", "/services", "/projects", "/writing", "/blog", "/tutorials", "/gallery", "/hire", "/contact", "/work-with-me"];
   const now = new Date();
   const pages: MetadataRoute.Sitemap = routes.map((r) => ({
     url: `${site.url}${r}`,
     lastModified: now,
     changeFrequency: r === "" || r === "/blog" || r === "/tutorials" ? "weekly" : "monthly",
-    priority: r === "" ? 1 : r === "/mentorship" || r === "/work-with-me" || r === "/hire" ? 0.9 : 0.7,
+    priority: r === "" ? 1 : r === "/mentorship" || r === "/work-with-me" || r === "/contact" || r === "/hire" ? 0.9 : 0.7,
   }));
   const posts: MetadataRoute.Sitemap = getAllPosts()
     .filter((p) => !p.draft)

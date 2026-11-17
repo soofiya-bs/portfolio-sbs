@@ -56,12 +56,8 @@ export const site = {
 
 export const stats = [
   { value: "6,900+", label: "Learners on Instagram" },
-  { value: "6,000+", label: "Followers on LinkedIn" },
-  { value: "15+", label: "Live projects" },
   { value: "12+", label: "Countries my students come from" },
   { value: "4+", label: "Years of mentoring & development" },
-  { value: "4", label: "Active platforms" },
-  { value: "4+", label: "Countries worked with" },
 ];
 
 /** Short first-person bio paragraphs, used on the About page. */
@@ -76,33 +72,59 @@ export const education = [
     school: "Indian Institute of Technology Madras",
     degree: "BS in Programming and Applications",
     period: "2023 — 2029",
-    note: "Currently pursuing. Building applied AI and software engineering depth alongside full-time work.",
+    note: "Currently pursuing, alongside full-time work. [TODO: confirm — online BS programme, part-time]",
   },
 ];
 
 export const experience = [
   {
     kind: "Development",
+    featured: true,
     title: "Head of Artificial Intelligence",
     org: "Made For Easy",
     period: "Jun 2023 — Present · Kochi",
     points: [
-      "Lead AI product work at Made For Easy.",
-      "Built the Skillage Assessment Tracker (about 600 active users, with voice-message updates for leadership) and an AI Resume Evaluator — both in use at Skillage Academy.",
+      "Lead AI product work end to end, from scoping and architecture to products in daily use.",
+      "Built the Skillage Assessment Tracker (~600 active users) and an AI Resume Evaluator — both in use at Skillage Academy.",
+      "Leading the production build of Evermi, including Mia, a voice-enabled AI shopping assistant.",
+    ],
+  },
+  {
+    kind: "Development",
+    featured: true,
+    title: "Lead of Technical and Growth",
+    org: "CortexIntel (United Kingdom)",
+    period: "Jan 2026 — Jun 2026",
+    points: ["[TODO: what you led at CortexIntel]", "[TODO: one result, ideally with a number]"],
+  },
+  {
+    kind: "Training",
+    featured: true,
+    title: "AI & Python Internship Trainer",
+    org: "Cozmek Pvt Ltd · Govt Model Polytechnic College, Vatakara",
+    period: "Jun 2025 — Aug 2025",
+    points: [
+      "Trained final-year Electronics students in Python and AI through hands-on sessions and structured modules.",
+      "Guided real-world mini projects applying AI to electronics use cases.",
+      "[TODO: add a result, e.g. number of students trained]",
     ],
   },
   {
     kind: "Training",
+    featured: true,
     title: "Content Creator — AI Engineering",
-    org: "Instagram",
+    org: "Instagram & LinkedIn",
     period: "May 2026 — Present",
-    points: ["Create Instagram content on AI engineering and software engineering for 6,900+ followers, making the concepts easy to learn for tech aspirants."],
+    points: [
+      "Teach AI engineering and software engineering to 6,900+ followers on Instagram and 6,000+ on LinkedIn.",
+      "Turn complex AI concepts into short, practical lessons for self-learners.",
+    ],
   },
   {
-    kind: "Development",
-    title: "Lead of Technical and Growth",
-    org: "CortexIntel (United Kingdom)",
-    period: "Jan 2026 — Jun 2026",
+    kind: "Business",
+    title: "Business Development Executive (promoted from intern)",
+    org: "Brototype",
+    period: "Aug 2025 — Feb 2026",
     points: [],
   },
   {
@@ -113,42 +135,25 @@ export const experience = [
     points: [],
   },
   {
-    kind: "Business",
-    title: "Business Development Executive",
-    org: "Brototype",
-    period: "Aug 2025 — Feb 2026 · Kochi",
-    points: ["Joined as an intern and was promoted to Business Development Executive."],
-  },
-  {
-    kind: "Training",
-    title: "AI & Python Internship Trainer",
-    org: "Cozmek Pvt Ltd · Govt Model Polytechnic College, Vatakara",
-    period: "Jun 2025 — Aug 2025",
-    points: [
-      "Trained final-year Electronics students in Python and AI basics through hands-on sessions and structured modules.",
-      "Guided real-world mini projects applying AI to electronics use cases.",
-    ],
-  },
-  {
     kind: "Training",
     title: "Lead Tutor — Mathematics",
     org: "Knowlix Learning",
     period: "Dec 2023 — Aug 2025",
-    points: ["Delivered IGCSE and CBSE mathematics sessions for students across India and the GCC, and ran occasional teacher training."],
+    points: [],
   },
   {
     kind: "Training",
     title: "Mathematics Teacher",
     org: "Escola International School",
     period: "Jun 2024 — Mar 2025",
-    points: ["Class 10 in-charge and high school coordinator for the inter-school arts competition."],
+    points: [],
   },
   {
     kind: "Training",
-    title: "Lead Lecturer — Computer Programming, CS & Mathematics",
+    title: "Lead Lecturer — Programming, CS & Mathematics",
     org: "Wadi Twaiba Girls Residential College",
-    period: "Jul 2023 — Jun 2024 · Ernakulam",
-    points: ["Mathematics and computer programming faculty, full-stack trainer and course coordinator."],
+    period: "Jul 2023 — Jun 2024",
+    points: [],
   },
 ];
 
@@ -199,6 +204,8 @@ export const program = {
     { k: "Weekly rhythm", v: "6 days of guided learning, review on day 7" },
     { k: "Daily commitment", v: "8 hours (full-time) · 4 hours (working learners)" },
     { k: "Live sessions", v: "Google Meet" },
+    { k: "Duration", v: "[TODO: program length, e.g. 12 weeks]" },
+    { k: "Joining", v: "Contact to join — orientation first" },
   ],
   join: {
     title: "Interested in joining? Let's talk.",
@@ -277,30 +284,32 @@ export const services = [
 export type Project = {
   slug: string;
   title: string;
+  /** where / who it was for */
   meta?: string;
-  /** e.g. "Live" or "Launching soon" — shown as a badge */
-  status?: string;
-  summary: string;
-  /** concrete results, shown as a checklist */
-  highlights?: string[];
+  /** one of: Live · MVP · In production · Private (or a [TODO]) */
+  status: string;
+  /** one line: the problem it solves */
+  problem: string;
+  /** what I did */
+  role: string;
+  /** the outcome — a metric where possible */
+  result: string;
   tags: string[];
   link: string;
   repo: string;
+  /** shown instead of a link when the project is private */
+  privateNote?: string;
 };
 
 export const projects: Project[] = [
   {
     slug: "skillage",
     title: "Skillage Assessment Tracker",
-    meta: "Made For Easy · In use at Skillage Academy",
+    meta: "For Skillage Academy · built at Made For Easy",
     status: "Live",
-    summary:
-      "An AI-integrated web platform for training institutes to assign, evaluate and rank learner work — replacing manual tracking across the academic department.",
-    highlights: [
-      "About 600 active users",
-      "Reduced the academic department's manual workload",
-      "Heads of department and the CEO get progress updates as voice messages",
-    ],
+    problem: "The academic team tracked learner assessments manually.",
+    role: "Designed and built the platform end to end.",
+    result: "~600 active users · less manual work for the academic team · leadership gets updates as voice messages",
     tags: ["AI", "EdTech", "Voice", "Full-stack"],
     link: "https://skillage-assessment-tracker.vercel.app/",
     repo: "",
@@ -308,15 +317,11 @@ export const projects: Project[] = [
   {
     slug: "resumeai",
     title: "AI Resume Evaluator",
-    meta: "Made For Easy · In use at Skillage Academy",
+    meta: "For Skillage Academy · built at Made For Easy",
     status: "Live",
-    summary:
-      "An AI system that evaluates student resumes against target roles and gives clear, actionable feedback — used by Skillage Academy for both student coaching and hiring.",
-    highlights: [
-      "In daily use at Skillage Academy",
-      "Evaluates student resumes and suggests improvements",
-      "Supports the academy's hiring process",
-    ],
+    problem: "Reviewing many student resumes consistently, for coaching and for hiring.",
+    role: "Designed and built the AI evaluation system.",
+    result: "In daily use at Skillage Academy for student coaching and hiring · [TODO: number of resumes evaluated]",
     tags: ["LLM", "Document analysis", "Full-stack"],
     link: "https://resumeai-soofiya.vercel.app/",
     repo: "",
@@ -324,52 +329,53 @@ export const projects: Project[] = [
   {
     slug: "evermi",
     title: "Evermi — AI-Powered Beauty & Skincare Platform",
-    meta: "Made For Easy · Oct 2026 — Present · Full production build in progress",
-    status: "MVP live",
-    summary:
-      "Taking a beauty and skincare startup from MVP to a production-grade e-commerce platform — with Mia, a voice-enabled AI shopping assistant that recommends products grounded in the store's own catalog.",
-    highlights: [
-      "Mia AI assistant: talk or type about skin concerns and routines, with speech-to-text input and natural voice replies",
-      "Recommendations and ingredient answers come only from approved product records — no made-up claims",
-      "Full store: catalog with ingredients and routines, search and filters, cart, wishlist, checkout and order tracking",
-      "Admin dashboard for sales, orders and catalog, plus Razorpay / Stripe payments, email and courier integrations",
-    ],
-    tags: ["Voice AI", "LLM", "E-commerce", "Full-stack", "Payments"],
+    meta: "Client project · built at Made For Easy",
+    status: "MVP",
+    problem: "A beauty and skincare startup needed its MVP turned into a production platform with AI-guided shopping.",
+    role: "Leading the production build: architecture, backend and Mia, a voice-enabled AI shopping assistant.",
+    result: "MVP live; full production build in progress · [TODO: add a metric after launch]",
+    tags: ["Voice AI", "LLM", "E-commerce", "Full-stack"],
     link: "https://mhakaie.vercel.app/",
     repo: "",
   },
   {
     slug: "made-for-easy-health",
     title: "Made For Easy — Digital Health Records",
-    meta: "Made For Easy · Healthcare",
-    summary:
-      "A centralised digital health records platform that brings a patient's records, doctor appointments and lab tests together in one secure place.",
-    highlights: [
-      "Doctor appointment booking and lab test scheduling in one flow",
-      "Encrypted storage for sensitive medical records",
-      "Real-time updates with Socket.IO and online payments with Stripe",
-    ],
+    meta: "Healthcare · Made For Easy",
+    status: "[TODO: Live / Private]",
+    problem: "Patient records, doctor appointments and lab tests were handled in separate places.",
+    role: "[TODO: your role on this project]",
+    result: "[TODO: add a result, e.g. clinics or patients using it]",
     tags: ["MERN", "Socket.IO", "Stripe", "Healthcare"],
     link: "",
     repo: "",
+    privateNote: "Private client project — details on request",
   },
   {
     slug: "knowlix-platform",
     title: "Knowlix Learning Platform",
     meta: "E-learning",
-    summary: "An e-learning platform connecting students with educational institutions, with demo access and course management.",
+    status: "[TODO: Live / Private]",
+    problem: "Students needed one place to discover institutions, try demos and manage courses.",
+    role: "[TODO: your role on this project]",
+    result: "[TODO: add a result]",
     tags: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
     link: "",
     repo: "",
+    privateNote: "Private client project — details on request",
   },
   {
     slug: "ember-upgrade",
     title: "Legacy Ember.js Upgrade for a Danish Client",
     meta: "Client project · Denmark",
-    summary: "Upgraded a legacy codebase to the latest Ember.js and modernised the UI/UX for better performance.",
+    status: "Private",
+    problem: "A client's legacy Ember.js codebase was outdated and slow.",
+    role: "Upgraded the codebase to the latest Ember.js and modernised the UI/UX.",
+    result: "Better performance on a modern, maintainable stack · [TODO: add a metric]",
     tags: ["Ember.js", "Node.js", "PostgreSQL"],
     link: "",
     repo: "",
+    privateNote: "Private client project — details on request",
   },
 ];
 
@@ -377,6 +383,15 @@ export const skills = [
   "Python", "LLM applications", "RAG", "AI agents", "AI automation", "Python APIs",
   "PostgreSQL", "Database design", "Docker", "Claude Code", "React", "Node.js",
   "TypeScript", "Java", "Spring Boot", "AWS",
+];
+
+/** Grouped skills — AI engineering first; Java / Spring Boot under "Also worked with". */
+export const skillGroups = [
+  { group: "AI & LLMs", items: ["LLM applications", "RAG & retrieval", "AI agents", "Voice AI", "Prompt design & evaluation", "AI automation"] },
+  { group: "Backend", items: ["Python", "Python APIs", "Node.js", "PostgreSQL", "MongoDB", "Database design"] },
+  { group: "Frontend", items: ["React", "TypeScript", "JavaScript", "Tailwind CSS"] },
+  { group: "DevOps & tools", items: ["Docker", "AWS", "Vercel", "Git", "Claude Code"] },
+  { group: "Also worked with", items: ["Java", "Spring Boot", "Angular", "Firebase"] },
 ];
 
 /** wa.me link with an optional pre-filled message */
@@ -387,16 +402,20 @@ export function whatsappLink(message?: string) {
 
 export const nav = [
   { label: "About", href: "/about" },
+  { label: "Work", href: "/projects" },
   { label: "Mentorship", href: "/mentorship" },
-  { label: "Services", href: "/services" },
-  { label: "Projects", href: "/projects" },
-  { label: "Blog", href: "/blog" },
-  { label: "Tutorials", href: "/tutorials" },
-  { label: "Hire me", href: "/hire" },
+  { label: "Writing", href: "/writing" },
 ];
 
+/** The single call-to-action button in the header */
+export const navCta = { label: "Contact", href: "/contact" };
+
 /** Extra links shown only in the footer */
-export const footerNav = [{ label: "Gallery", href: "/gallery" }];
+export const footerNav = [
+  { label: "Services", href: "/services" },
+  { label: "Hire me", href: "/hire" },
+  { label: "Gallery", href: "/gallery" },
+];
 
 /* ─────────────────────────────────────────────────────────────
  *  TESTIMONIALS & GALLERY
@@ -495,16 +514,16 @@ export type GalleryItem = {
 export const gallery: GalleryItem[] = [
   {
     src: "/gallery/learners-at-skillage.jpg",
-    alt: "Soofiya Binth Shajahan teaching a full classroom of learners with laptops at Skillage Digital Academy",
-    caption: "A full house of learners at Skillage Digital Academy",
+    alt: "Soofiya Binth Shajahan teaching a full classroom of learners with laptops at Skillage Academy",
+    caption: "A full house of learners at Skillage Academy",
     category: "Talks & Events",
     width: 2000,
     height: 1333,
   },
   {
     src: "/gallery/expert-session-skillage.jpg",
-    alt: "Soofiya Binth Shajahan speaking in front of a large screen during a session at Skillage Digital Academy",
-    caption: "Expert session at Skillage Digital Academy",
+    alt: "Soofiya Binth Shajahan speaking in front of a large screen during a session at Skillage Academy",
+    caption: "Expert session at Skillage Academy",
     category: "Talks & Events",
     width: 2000,
     height: 1333,
@@ -579,13 +598,14 @@ export const hire = {
   impact: [
     { metric: "~600", label: "active users on the Skillage Assessment Tracker I built — it cut the academic team's manual work" },
     { metric: "2", label: "AI products in daily use at Skillage Academy, including a resume evaluator used in hiring" },
-    { metric: "15+", label: "live projects shipped, from MVPs to production platforms" },
+    { metric: "3", label: "AI products live or in production: assessment tracker, resume evaluator, Evermi" },
     { metric: "Voice AI", label: "built Mia, a speech-enabled shopping assistant grounded in a product catalog (Evermi)" },
   ],
   skills: [
     { group: "AI & LLMs", items: ["LLM applications", "RAG & retrieval", "AI agents", "Voice AI (speech-to-text / text-to-speech)", "Prompt design & evaluation", "AI automation"] },
-    { group: "Backend & data", items: ["Python", "Python APIs", "Node.js", "Java · Spring Boot", "PostgreSQL", "Database design"] },
+    { group: "Backend & data", items: ["Python", "Python APIs", "Node.js", "PostgreSQL", "Database design"] },
     { group: "Frontend & cloud", items: ["React", "TypeScript", "Full-stack delivery", "Docker", "AWS", "Claude Code"] },
+    { group: "Also worked with", items: ["Java", "Spring Boot", "Angular", "Firebase"] },
   ],
   strengths: [
     { t: "End-to-end ownership", d: "From scoping and architecture to a deployed product that users rely on — not just a notebook demo." },
@@ -627,3 +647,12 @@ export const packages = [
     includes: ["Uptime and health monitoring", "Bug fixes, security & dependency updates", "Small enhancements each month"],
   },
 ];
+
+/* ─────────────────────────────────────────────────────────────
+ *  [TODO] placeholders
+ *  Shown highlighted while running `npm run dev`; removed on the live site.
+ * ───────────────────────────────────────────────────────────── */
+export const TODO_RE = /\s*(?:·\s*)?\[TODO:[^\]]*\]/g;
+export const hasTodo = (v?: string) => !!v && v.includes("[TODO");
+/** Text with any [TODO …] parts removed (what the live site shows). */
+export const stripTodo = (v: string) => v.replace(TODO_RE, "").trim();

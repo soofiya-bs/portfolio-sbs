@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { hasTodo, showSamples, stripTodo } from "@/content/site";
 
 /**
  * Jewel accent palette — gold, emerald, royal blue, plum.
@@ -103,3 +104,33 @@ export function Tag({ children }: { children: ReactNode }) {
     </span>
   );
 }
+
+/**
+ * Renders text that may contain "[TODO: …]" placeholders.
+ * Locally (npm run dev) the placeholders are highlighted so they're easy to find;
+ * on the live site they're removed, and if nothing is left the element renders nothing.
+ */
+export function TodoText({ text, className = "" }: { text: string; className?: string }) {
+  if (!hasTodo(text)) return <span className={className}>{text}</span>;
+  if (!showSamples) {
+    const clean = stripTodo(text);
+    return clean ? <span className={className}>{clean}</span> : null;
+  }
+  const parts = text.split(/(\[TODO:[^\]]*\])/g).filter(Boolean);
+  return (
+    <span className={className}>
+      {parts.map((part, i) =>
+        part.startsWith("[TODO") ? (
+          <mark key={i} className="rounded bg-gold/20 px-1 font-mono text-[0.85em] text-gold-soft">
+            {part}
+          </mark>
+        ) : (
+          <span key={i}>{part}</span>
+        )
+      )}
+    </span>
+  );
+}
+
+/** true when the text still has something to show on the current build */
+export const showsText = (text?: string) => !!text && (showSamples || !!stripTodo(text));

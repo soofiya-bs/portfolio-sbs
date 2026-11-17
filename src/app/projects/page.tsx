@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { projects, stats } from "@/content/site";
+import { projects } from "@/content/site";
 import { PageHero } from "@/components/PageHero";
 import { Arrow, ButtonLink, Container, Section } from "@/components/ui";
 import { ProjectExplorer } from "@/components/ProjectExplorer";
@@ -15,10 +15,9 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   const liveCount = projects.filter((p) => isLive(p.status)).length;
-  const liveProjects = stats.find((s) => s.label.toLowerCase().includes("live projects"))?.value ?? "15+";
   const summary = [
-    { k: liveProjects, v: "live projects shipped" },
-    { k: String(liveCount), v: "featured products live now" },
+    { k: String(projects.length), v: "featured projects" },
+    { k: String(liveCount), v: "live now, with links" },
     { k: "~600", v: "active users on one platform" },
     { k: "4", v: "industries: EdTech, hiring, e-commerce, healthcare" },
   ];

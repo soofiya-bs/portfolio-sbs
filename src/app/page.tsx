@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { program, site, skills, stats, workedWith } from "@/content/site";
+import { program, site, stats, workedWith } from "@/content/site";
 import { accent, Arrow, ButtonLink, Container, Section, SectionHeading } from "@/components/ui";
-import { CtaBand, Credentials, ProgramSteps, ProjectCards, ServiceCards } from "@/components/sections";
-import { CountUp, Marquee, RotatingWord } from "@/components/motion";
+import { CtaBand, Credentials, ProgramSteps, ProjectCards, ServiceCards, SkillGroups } from "@/components/sections";
+import { CountUp, RotatingWord } from "@/components/motion";
 import { PostGrid } from "@/components/posts";
-import { getAllPosts } from "@/lib/posts";
+import { getPosts } from "@/lib/posts";
 import { Testimonials } from "@/components/Testimonials";
 import { GalleryPreview } from "@/components/GalleryPreview";
 
@@ -74,7 +74,8 @@ function RoadmapCard() {
 }
 
 export default function Home() {
-  const latest = getAllPosts().slice(0, 3);
+  const articles = getPosts("blog").slice(0, 3);
+  const seriesStart = getPosts("tutorials")[0];
   return (
     <>
       {/* HERO */}
@@ -82,35 +83,31 @@ export default function Home() {
         <Container className="relative grid gap-14 pb-20 pt-16 sm:pt-24 lg:grid-cols-[1.25fr_1fr] lg:items-center lg:pb-28">
           <div>
             <p data-reveal className="inline-flex items-center gap-2.5 rounded-full border border-line bg-surface/70 px-3.5 py-1.5 font-mono text-[11px] text-muted">
-              <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-gold" />
-              <span className="cursor">~ iitm · applied-ai · mentoring</span>
+              <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
+              <span>SBS Personal Mentoring · Applied &amp; Agentic AI</span>
             </p>
             <h1 data-reveal style={{ "--d": "80ms" } as React.CSSProperties} className="mt-7 font-serif text-[2.75rem] leading-[1.02] tracking-tight text-text sm:text-6xl lg:text-[4.4rem]">
-              Build real <RotatingWord words={["AI.", "LLM apps.", "AI agents.", "automations."]} />
-              <br />
-              <span className="italic text-gold-gradient">Learn it the right way.</span>
+              <span className="sr-only">Build real AI, LLM apps, AI agents and automations. Learn it the right way.</span>
+              <span aria-hidden="true">
+                Build real{" "}
+                <RotatingWord words={["AI.", "LLM apps.", "AI agents.", "automations."]} />
+                <br />
+                <span className="italic text-gold-gradient">Learn it the right way.</span>
+              </span>
             </h1>
             <p data-reveal style={{ "--d": "160ms" } as React.CSSProperties} className="mt-7 max-w-xl text-lg leading-relaxed text-muted">
-              I&apos;m {site.name} — an applied AI engineer helping self-learners through guided self-learning. I
-              also build AI products and automations for companies.
+              One-to-one mentoring in Applied &amp; Agentic AI: a weekly roadmap, daily tasks and a live review every
+              week — so you stop collecting tutorials and start shipping real projects. I&apos;m {site.name}, an
+              applied AI engineer and BS student at IIT Madras.
             </p>
-            <div data-reveal style={{ "--d": "240ms" } as React.CSSProperties} className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <div data-reveal style={{ "--d": "240ms" } as React.CSSProperties} className="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
               <ButtonLink href="/work-with-me?type=student">
-                Join the mentorship <Arrow />
+                Apply for mentorship <Arrow />
               </ButtonLink>
-              <ButtonLink href="/work-with-me?type=project" variant="ghost">
-                Hire me for a project
-              </ButtonLink>
-            </div>
-            <p data-reveal style={{ "--d": "320ms" } as React.CSSProperties} className="glass glass-neutral mt-7 inline-flex flex-wrap items-center gap-x-4 gap-y-2 !rounded-2xl px-4 py-3 text-sm text-muted">
-              <span className="inline-flex items-center gap-2">
-                <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-emerald" />
-                Open to AI engineer roles · remote &amp; on-site · Kerala, Hyderabad
-              </span>
-              <Link href="/hire" className="font-medium text-gold-soft underline-offset-4 hover:underline">
-                For recruiters →
+              <Link href="/mentorship" className="text-sm font-medium text-gold-soft underline-offset-4 hover:underline">
+                See how the program works →
               </Link>
-            </p>
+            </div>
           </div>
 
           {/* Portrait with floating credibility chips */}
@@ -128,10 +125,6 @@ export default function Home() {
                 className="aspect-[4/5] w-full origin-[52%_75%] scale-[1.3] object-cover"
               />
             </div>
-            <div className="float-slow absolute -left-4 bottom-8 rounded-2xl border border-line bg-surface/90 px-4 py-3 shadow-lg sm:-left-8">
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-faint">Studying at</p>
-              <p className="mt-0.5 font-serif text-lg text-text">IIT Madras</p>
-            </div>
             <div className="float-slower absolute -right-3 top-8 rounded-2xl border border-line bg-surface/90 px-4 py-3 shadow-lg sm:-right-6">
               <p className="font-serif text-2xl text-text">6,900+</p>
               <p className="text-xs text-muted">self-learners on Instagram</p>
@@ -140,14 +133,11 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* TICKER */}
-      <Marquee items={skills} />
-
       {/* STATS */}
       <section className="border-b border-line bg-surface/40">
-        <Container className="flex flex-wrap justify-center gap-y-8 py-10">
+        <Container className="grid gap-8 py-10 sm:grid-cols-3">
           {stats.map((s, i) => (
-            <div key={s.label} data-reveal style={{ "--d": `${i * 90}ms` } as React.CSSProperties} className="basis-1/2 px-2 text-center md:basis-1/4 xl:basis-[14.285%]">
+            <div key={s.label} data-reveal style={{ "--d": `${i * 90}ms` } as React.CSSProperties} className="px-2 text-center">
               <p className={`font-serif text-4xl ${accent(i).text}`}>
                 <CountUp value={s.value} />
               </p>
@@ -160,6 +150,7 @@ export default function Home() {
       {/* WORKED WITH */}
       <section className="border-b border-line">
         <Container className="flex flex-col gap-4 py-8 md:flex-row md:items-center md:gap-10">
+          {/* TODO: swap these wordmarks for real logos once logo files are available (public/logos/...) */}
           <p className="shrink-0 font-mono text-[11px] uppercase tracking-[0.2em] text-faint">Built for &amp; taught with</p>
           <ul className="flex flex-wrap gap-x-7 gap-y-2">
             {workedWith.map((w) => (
@@ -214,7 +205,7 @@ export default function Home() {
             <SectionHeading
               eyebrow={program.name}
               title="Guided self-learning, reviewed every week."
-              lead={program.summary}
+              lead="Six days of learning on a day-by-day plan, then a live one-to-one review on day 7. Your roadmap is set with you at orientation."
             />
             <ButtonLink href="/mentorship" variant="ghost" className="mt-8">
               How it works <Arrow />
@@ -230,12 +221,12 @@ export default function Home() {
       {/* SERVICES */}
       <Section className="border-t border-line">
         <SectionHeading
-          eyebrow="Services"
-          title="Three ways to work together."
-          lead="For learners who want structure, institutions that want an expert in the room, and companies that want AI shipped."
+          eyebrow="Beyond mentoring"
+          title="Talks for institutions. AI products for companies."
+          lead="Institutions book expert talks and workshops; companies hire me to build and ship AI."
         />
         <div className="mt-14">
-          <ServiceCards />
+          <ServiceCards exclude={["mentoring"]} />
         </div>
       </Section>
 
@@ -248,31 +239,36 @@ export default function Home() {
         <div className="mt-14">
           <Credentials />
         </div>
+        <div className="mt-14 border-t border-line pt-12">
+          <SkillGroups />
+        </div>
       </Section>
 
       {/* GALLERY */}
       <GalleryPreview />
 
-      {/* LATEST WRITING */}
-      {latest.length > 0 && (
+      {/* WRITING */}
+      {articles.length > 0 && (
         <Section className="border-t border-line">
           <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
             <SectionHeading
-              eyebrow="Blog & tutorials"
+              eyebrow="Writing"
               title="Learn something today."
-              lead="Plain-language articles and hands-on tutorials for self-learners in applied AI."
+              lead="Plain-language articles, plus a hands-on tutorial series you can follow from Part 1."
             />
-            <div className="flex shrink-0 gap-3">
-              <ButtonLink href="/blog" variant="ghost">
-                Blog <Arrow />
-              </ButtonLink>
-              <ButtonLink href="/tutorials" variant="ghost">
-                Tutorials <Arrow />
+            <div className="flex shrink-0 flex-wrap items-center gap-5">
+              {seriesStart && (
+                <Link href={`/tutorials/${seriesStart.slug}`} className="text-sm font-medium text-gold-soft underline-offset-4 hover:underline">
+                  Start the tutorial series (Part 1) →
+                </Link>
+              )}
+              <ButtonLink href="/writing" variant="ghost">
+                All writing <Arrow />
               </ButtonLink>
             </div>
           </div>
           <div className="mt-14">
-            <PostGrid posts={latest} showKind />
+            <PostGrid posts={articles} />
           </div>
         </Section>
       )}

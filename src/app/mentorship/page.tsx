@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { program, site } from "@/content/site";
 import { PageHero } from "@/components/PageHero";
-import { accent, Arrow, ButtonLink, Section, SectionHeading } from "@/components/ui";
+import { accent, Arrow, ButtonLink, Section, SectionHeading, showsText, TodoText } from "@/components/ui";
 import { CtaBand, ProgramSteps } from "@/components/sections";
 import { Testimonials } from "@/components/Testimonials";
 import { BookCallButton, WA_MESSAGES, WhatsAppButton } from "@/components/Contact";
@@ -45,11 +45,13 @@ export default function MentorshipPage() {
 
       {/* At a glance */}
       <Section className="!pb-0">
-        <dl className="grid gap-px overflow-hidden rounded-[1.25rem] border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
-          {program.glance.map((g) => (
+        <dl className="grid gap-px overflow-hidden rounded-[1.25rem] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+          {program.glance.filter((g) => showsText(g.v)).map((g) => (
             <div key={g.k} className="bg-surface p-6">
               <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-faint">{g.k}</dt>
-              <dd className="mt-2 text-[15px] text-text">{g.v}</dd>
+              <dd className="mt-2 text-[15px] text-text">
+                <TodoText text={g.v} />
+              </dd>
             </div>
           ))}
         </dl>
@@ -89,10 +91,23 @@ export default function MentorshipPage() {
               <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-gold">Join the program</p>
               <h2 className="mt-4 font-serif text-4xl leading-[1.08] tracking-tight text-text sm:text-5xl">{program.join.title}</h2>
               <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">{program.join.body}</p>
+              <p className="mt-6 text-sm text-text">
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-faint">Price</span>{" "}
+                <span className="ml-2">Contact to join</span>
+              </p>
+              <h3 className="mt-8 font-mono text-[11px] uppercase tracking-[0.18em] text-faint">Your next step</h3>
+              <ol className="mt-4 grid gap-3 sm:grid-cols-3">
+                {["Send the short application form", "I reply with the orientation details", "Orientation, then your week-1 roadmap"].map((t, i) => (
+                  <li key={t} className="flex gap-3 text-sm leading-snug text-muted">
+                    <span className={`inline-grid h-6 w-6 shrink-0 place-items-center rounded-full font-mono text-[11px] ${accent(i).soft} ${accent(i).text}`}>{i + 1}</span>
+                    {t}
+                  </li>
+                ))}
+              </ol>
             </div>
             <div className="flex flex-col gap-3">
               <ButtonLink href="/work-with-me?type=student">
-                Send an inquiry <Arrow />
+                Apply for mentorship <Arrow />
               </ButtonLink>
               <WhatsAppButton message={WA_MESSAGES.student} label="Ask on WhatsApp" />
               <BookCallButton />

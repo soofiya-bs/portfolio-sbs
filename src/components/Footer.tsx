@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { footerNav, nav, site, whatsappLink } from "@/content/site";
+import { footerNav, nav, navCta, site, whatsappLink } from "@/content/site";
 import { Container } from "./ui";
 
 const socialLabels: Record<string, string> = {
@@ -22,7 +22,7 @@ export function Footer() {
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-faint">Explore</p>
             <ul className="mt-4 space-y-2.5">
-              {[...nav, ...footerNav, { label: "Work with me", href: "/work-with-me" }].map((item) => (
+              {[...nav, ...footerNav, navCta].map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className="text-sm text-muted transition-colors hover:text-gold-soft">
                     {item.label}
