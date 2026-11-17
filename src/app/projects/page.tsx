@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { projects } from "@/content/site";
+import { projects, showSamples, stripTodo, type Project } from "@/content/site";
 import { PageHero } from "@/components/PageHero";
 import { Arrow, ButtonLink, Container, Section } from "@/components/ui";
 import { ProjectExplorer } from "@/components/ProjectExplorer";
@@ -12,6 +12,11 @@ export const metadata: Metadata = {
     "Applied AI projects in production: an assessment platform with ~600 users, an AI resume evaluator used in hiring, a voice-AI e-commerce platform, and more.",
   alternates: { canonical: "/projects" },
 };
+
+/** On the live site, [TODO] notes are stripped before the data reaches the browser (not just hidden). */
+const publicProjects: Project[] = showSamples
+  ? projects
+  : projects.map((p) => ({ ...p, status: stripTodo(p.status), role: stripTodo(p.role), result: stripTodo(p.result), problem: stripTodo(p.problem) }));
 
 export default function ProjectsPage() {
   const liveCount = projects.filter((p) => isLive(p.status)).length;
@@ -44,7 +49,7 @@ export default function ProjectsPage() {
       </PageHero>
 
       <Section className="!pt-14">
-        <ProjectExplorer projects={projects} />
+        <ProjectExplorer projects={publicProjects} />
       </Section>
 
       {/* What to do next, depending on who's reading */}
